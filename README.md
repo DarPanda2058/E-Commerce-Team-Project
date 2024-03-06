@@ -1,2 +1,2 @@
 # E-Commerce-Team-Project
-E-Commerce
+The project aims to develop a prototype web-based e-commerce platform for a group of local traders in a suburb of Cleckhuddersfax. Commissioned by the traders' association, the platform targets local residents who seek convenient access to fresh goods while supporting small independent businesses. Key benefits include expanding market reach, enhancing customer convenience, and fostering community support for local businesses.
