@@ -1,0 +1,342 @@
+/* styles.css */
+
+/* Resetting default styles for the body */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-family: 'Inter', sans-serif; 
+}
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+/* styles.css */
+
+/* Adjusting size of the navbar */
+.navbar {
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px; /* Adjust padding to decrease the size of the navbar */
+    border-bottom: 1px solid black; /* Add a black line to separate the navbar from the body */
+}
+.left {
+    margin-left: 20px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.left a {
+    color: black; /* Set text color to black */
+    text-decoration: none; /* Remove underline */
+}
+
+.dropbtn::after {
+    content: "\25BC"; /* Unicode for downward arrow */
+    margin-left: 5px; /* Add margin to create space between text and arrow */
+}
+
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px;
+    margin-left: 20px;
+}
+
+.search-container input[type="text"] {
+    border: none;
+    outline: none;
+    background-color:transparent; /* Set background color to white */
+    padding: 5px; /* Optional: Adjust padding for the input field */
+}
+
+
+.search-container button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.search-icon {
+    margin-left: 5px;
+    /* margin-right: 20px; */
+    display: flex;
+    align-items: center;
+    background-color: #ccc; /* Grey background color */
+    border-radius: 10px; /* Rounded border */
+    padding: 5px; /* Padding inside the card */
+}
+
+.search-icon img {
+    width: 30px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+}
+
+.search-card {
+    background-color: #ccc; /* Grey background color */
+    border-radius: 10px; /* Rounded borders */
+    padding: 10px; /* Padding inside the card */
+    margin-left: 5px; /* Adjust as needed */
+    font-family: 'Inter', sans-serif; /* Set font-family */
+    font-size: 16px; /* Set font size */
+    color: #333; /* Set text color */
+}
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 5px; /* Adjust as needed */
+}
+
+
+
+
+.right {
+    display: flex;
+    align-items: center;
+}
+.right span {
+    margin-right: 30px; /* Adjust this value as per your preference */
+}
+
+/* .cart-container {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+} */
+
+.cart-icon {
+    position: relative;
+}
+
+
+
+.badge {
+    /* position: absolute;
+    top: -5px; */
+    /* right: 20px; */
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    /* margin: 5px; */
+}
+.logo {
+    flex: 1; /* Let the logo take up remaining space */
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    width: 30px; /* Adjust this value to change the width of the icons */
+    height: 30px; /* Adjust this value to change the height of the icons */
+}
+.logoicon{
+    width: 60px;
+    height: 60px;
+}
+.searchicon{
+    width: 40px;
+    height: 40px;
+}
+
+.cart-container {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #ccc; /* Grey background color */
+    border-radius: 20px; /* Rounded border */
+    padding: 5px; /* Padding inside the card */
+}
+
+.cart-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Spacing between cart icon and text */
+}
+
+.cart-icon img {
+    margin-right: 5px; /* Spacing between cart icon and badge */
+}
+
+.cart-container span {
+    margin-right: 10px; /* Spacing between cart icon and "Cart" text */
+}
+
+.right span {
+    margin-right: 10px; /* Spacing between "Welcome User" and cart icon */
+}
+
+/* Flexbox to evenly distribute items in the cart container */
+.cart-container > * {
+    flex: 1; /* Each child element takes up equal space */
+}
+
+.cart-container > *:not(:last-child) {
+    margin-right: 10px; /* Spacing between items */
+}
+
+
+/* Now for the body part */
+.container {
+    margin: 0 40px;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+.section {
+    margin-bottom: 40px; /* Add some space between sections */
+}
+
+.description-field {
+    width: calc(100% - 80px);
+    margin: 0 auto;
+    height: 50px; /* Set height as needed */
+    border-radius: 10px; /* Rounded borders */
+    border: 1px solid #ccc; /* Border color */
+    display: block; /* Ensure it behaves as a block element */
+    padding: 10px; /* Add padding for better appearance */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-family: 'Inter', sans-serif; /* Set font-family */
+    font-size: 16px; /* Set font size */
+    color: #333; /* Set text color */
+}
+
+.description-field-big {
+    width: calc(100% - 80px);
+    margin: 0 auto;
+    height: 100px; /* Set height as needed */
+    border-radius: 10px; /* Rounded borders */
+    border: 1px solid #ccc; /* Border color */
+    display: block; /* Ensure it behaves as a block element */
+    padding: 10px; /* Add padding for better appearance */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-family: 'Inter', sans-serif; /* Set font-family */
+    font-size: 16px; /* Set font size */
+    color: #333; /* Set text color */
+}
+
+.row {
+    display: flex;
+    justify-content: space-between; /* To evenly space out the input fields */
+}
+
+.input-group {
+    flex: 1; /* To evenly distribute input fields in the row */
+    margin-right: 20px; /* Adjust as needed */
+    margin-bottom: 40px;
+    
+}
+
+.input-group:last-child {
+    margin-right: 0; /* Remove margin from the last input field */
+}
+
+.input-group label {
+    display: block; /* Make label occupy full width */
+    margin-bottom: 5px; /* Add some space between label and input */
+}
+
+.styled-input {
+    width: calc(100% - 80px);
+    margin: 0 auto;
+    height: 50px; /* Set height as needed */
+    border-radius: 10px; /* Rounded borders */
+    border: 1px solid #ccc; /* Border color */
+    display: block; /* Ensure it behaves as a block element */
+    padding: 10px; /* Add padding for better appearance */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-family: 'Inter', sans-serif; /* Set font-family */
+    font-size: 16px; /* Set font size */
+    color: #333; /* Set text color */
+}
+
+.card-row {
+    display: flex;
+}
+
+.card {
+    margin-left: 40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    margin-right: 10px; /* Adjust margin between cards */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #333;
+    border: 2px solid black;
+    
+}
+
+.icon {
+    font-size: 48px;
+    color: #333;
+}
+
+.save-button {
+    width: 100px;
+    height: 50px;
+    background-color:#D49336;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+
+
+
