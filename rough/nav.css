@@ -1,0 +1,22 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: inter;
+    min-height: 100vh;
+}
+.small-font{
+    font-size: 0.8rem;
+}
+ul{
+    list-style: none;
+
+}
+li{
+    display: inline-block;
+    position: relative;
+}
+
+
