@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/PaymentOption.css">
+</head>
+<body>
+    <header>
+        <img class="logo" src="images/logo.png" height="auto" width="70px" alt="">
+        <img class="acc" src="images/user.png" height="auto" width="45px" alt="">
+    </header>
+    <div class="title-row">
+        <div class="title-shopping">
+            <p>1. Shopping Cart </p>
+        </div>
+        <div class="title-collection">
+            <p>2. Collection Point</p>
+        </div>
+        <div class="title-payment" id="active">
+            <p>3. Payment Option</p>
+        </div>
+    </div>
+    <form action="#">
+        <table>
+            <tr class="header">
+                <th colspan="3">Payment Method</th>
+            </tr>
+            <tr class="payment-row">
+                <td><input type="radio" name="pay-check" id="payment"></td>
+                <td class="payment-desc">
+                    <b>PayPal</b>
+                    <p>Pay securely with PayPal. Checkout in seconds with PayPal.</p>
+                </td>
+                <td class="date-container" id="col-width">
+                    <img src="images/paypal-logo.png" width="200px" height="auto" alt="PayPal">
+                </td>
+            </tr>
+        </table>
+    </form>
+        <div class="total-container">
+            <div class="sub-total">
+                <p>Sub-total</p>
+                <p>&pound; 200</p>
+            </div>
+            <div class="shipping">
+                <p>Shipping</p>
+                <p>Free</p>
+            </div>
+            <div class="total">
+                <p>TOTAL</p>
+                <p>&pound; 200</p>
+            </div>
+            <button>Continue</button>
+            <button>Cancel</button>
+        </div>
+</body>
+</html>

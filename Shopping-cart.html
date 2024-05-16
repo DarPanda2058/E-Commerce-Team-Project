@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/Shopping-cart.css">
+</head>
+<body>
+    <header>
+        <img class="logo" src="images/logo.png" height="auto" width="70px" alt="">
+        <img class="acc" src="images/user.png" height="auto" width="45px" alt="">
+    </header>
+    <div class="title-row">
+        <div class="title-shopping" id="active">
+            <p>1. Shopping Cart </p>
+        </div>
+        <div class="title-collection">
+            <p>2. Collection Point</p>
+        </div>
+        <div class="title-payment">
+            <p>3. Payment Option</p>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <th colspan="2">Shopping Cart</th>
+            <td id="col-width">Price</td>
+            <td id="col-width">Quantity</td>
+        </tr>
+        <tr class="repeating-row">
+            <td class="product-image-cart"><img src="images/image.jpg" alt="Image"></td>
+            <td>
+                <div class="product-desc-cart">
+                    <p>Product Name</p>    
+                    <p class = "description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus fugit voluptatem animi natus temporibus dolore debitis nihil quasi, vitae similique ullam sint numquam nam tenetur laboriosam, iusto placeat recusandae reiciendis!</p>
+                </div>
+            </td>
+            <td class="cart-price" id="col-width">&pound; 200</td>
+            <td class = "cart-quantity-buttons" id="col-width">
+                <button>-</button>
+                <span>&nbsp; 1 &nbsp;</span>
+                <button>+</button>
+            </td>
+            <td class="remove-cartitem" id="col-width"><button>Remove</button></td>
+        </tr>
+    </table>
+        <div class="total-container">
+            <div class="sub-total">
+                <p>Sub-total</p>
+                <p>&pound; 200</p>
+            </div>
+            <div class="shipping">
+                <p>Shipping</p>
+                <p>Free</p>
+            </div>
+            <div class="total">
+                <p>TOTAL</p>
+                <p>&pound; 200</p>
+            </div>
+            <!-- <a href="/CollectionPoint.html"><button>Continue</button></a> -->
+            <button><a href="/CollectionPoint.html">Continue</a></button>
+            <button>Cancel</button>
+        </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: inter;
+    min-height: 100vh;
+}
+header{
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+
+}
+.logo{
+    margin: auto;
+}
+.acc{
+    margin: 20px;
+}
+
+.title-row{
+    width: 100%;
+    margin-block: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+    background-color: rgb(164, 164, 164);
+    padding-block: 35px;
+}
+.title-row *{
+    width: 100%;
+}
+.title-row * p{
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(93, 93, 93);
+}
+.title-row #active p{
+    font-weight: bold;
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+
+
+table{
+    margin-inline: auto;
+    padding-inline: 60px;
+}
+table th{
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+table td{
+    padding: 10px;
+}
+.collection-row{
+    border: 1px solid black;
+}
+.header{
+    padding-inline: 60px;
+}
+.header td{
+    text-align: center;
+}
+.collection-row td{
+    padding-block: 20px;
+    padding-inline: 60px;
+}
+.collection-row select{
+    padding: 5px;
+}
+.collection-point{
+    font-weight: bolder;
+    text-align: left;
+    padding-left: 12px;
+    font-size: 1.2rem;
+}
+
+.total-container{
+    margin-left: auto;
+    margin-right: 180px;
+    width: 200px;
+    height: auto;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+.sub-total,.shipping,.total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.shipping{
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+.total{
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding-top: 20px;
+
+}
+.total-container button{
+    background-color: rgb(192, 192, 192);
+    color: white;
+    padding-block: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    transition: 0.2s ease-in;
+}
+.total-container button:hover{
+    background-color: black;
+}
+.total-container a{
+    text-decoration: none;
+    color: white;
+}
+.sub-total{
+    padding-block: 10px;
+}
+
