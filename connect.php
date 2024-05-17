@@ -3,9 +3,7 @@
 if (!$conn) {
    $m = oci_error();
    echo $m['message'], "\n";
-   exit; } else {
-   print "Connected to Oracle!"; 
-} 
+   exit; }
    
    
    // echo "Display data";
@@ -39,4 +37,4 @@ if (!$conn) {
    
    
    
-   oci_close($conn); ?>
+   ?>
