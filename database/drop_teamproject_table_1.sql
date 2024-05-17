@@ -1,0 +1,15 @@
+drop table Cart;
+drop table Collection_Slot;
+drop table Discount;
+drop table Order_Product;
+drop table "Order";
+drop table Cart_Product;
+drop table Payment;
+drop table Product;
+drop table Report;
+drop table Review;
+drop table Shop;
+drop table User_Order;
+drop table "User";
+drop table Wishlist_Product;
+drop table Wishlist;

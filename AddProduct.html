@@ -8,108 +8,124 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <ul class="left">
-        <li class="dropdown">
-            <a href="#" class="dropbtn">Categories <i class="fa fa-angle-down"></i></a>
-            <div class="dropdown-content">
-                <a href="#">Category 1</a>
-                <a href="#">Category 2</a>
-                <a href="#">Category 3</a>
-            </div>
-        </li>
-    </ul>
-    <div class="search-wrapper">
-        <div class="search-icon">
-            <img src="images/search.png" alt="Search" class="searchicon">
-        </div>
-        <div class="search-container">
-            <input type="text" placeholder="Search">
-        </div>
-    </div>
-  
-
-    <div class="logo">
-        <img src="images/logo.png" alt="Logo" class="logoicon">
-    </div>
-    <div class="right">
-        <span>Welcome User</span>
-        <div class="cart-container">
-            <div class="cart-icon">
-                <img src="images/shopping-cart.png" alt="Cart" class="icon">
-                <span class="badge">1</span>
-            </div>
-            <span>Cart</span>
-        </div>
-        <div class="profile-icon">
-            <img src="images/user.png" alt="Profile" class="icon">
-        </div>
-    </div>
-</nav>
+    <nav class="nav-bar">
+        <ul class="menu">
+            <li class="drop-hover">
+                <div class="category">
+                    <a href="">Categories <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                    <ul class="drop-content">
+                        <li><a href="">Option 1</a></li>
+                        <li><a href="">Option 2</a></li>
+                        <li><a href="">Option 3</a></li>
+                    </ul>
+                </div>
+                <div class="search-box">
+                    <img src="images/search.png" width="30px" height="30px" alt="search button">
+                    <input type="text" placeholder="  Search">
+                </div>
+            </li>
+            <li><img src="images/Logo.png" height="55px" width="55px" alt="LOGO"></li>
+            <li class="account">
+                <span>Welcome User</span>
+                <div class="cart-container">
+                    <img src="images/shopping-cart.png" width="25px" height="25px" alt="Cart">
+                    <span>Cart</span>
+                    <span id="items_in_cart">1</span>
+                </div>
+                <img src="images/user.png" height="40px" width="40px" alt="">
+            </li>
+        </ul>
+    </nav>
 
     <div class="container">
-        <h1>Add New Product</h1>
-        <div class="section">
-            <h2>Product Description</h2>
-            <textarea class="description-field" placeholder="Enter product description..."></textarea>
-        </div>
-        <div class="section">
-            <h2>Product Description</h2>
-            <textarea class="description-field-big" placeholder="Enter description..."></textarea>
-        </div>
-        <div class="row">
-            <div class="input-group">
-                <label for="available-stock">                <h2>Available Stock:</h2>
-                </label>
-                <input type="text" id="available-stock" placeholder="Enter available stock" class="styled-input">
-
+        <form action="AddProduct.php" method="post" enctype="multipart/form-data">
+            <h1>Add New Product</h1>
+            <div class="section">
+                <h2>Product Name</h2>
+                <input type="text" name="pname" class="description-field" placeholder="Enter product name"></textarea>
             </div>
-            <div class="input-group">
-                <label for="price"><h2>Price:</h2></label>
-                
-                
-
-                <input type="text" id="price" placeholder="Enter price" class="styled-input">
+            <div class="section">
+                <h2>Product Description</h2>
+                <textarea name="pdesc" class="description-field-big" placeholder="Enter description..."></textarea>
             </div>
-       
-        </div>
+            <div class="row">
+                <div class="input-group">
+                    <label for="available-stock">
+                        <h2>Available Stock:</h2>
+                    </label>
+                    <input type="text" name="pstock" id="available-stock" placeholder="Enter available stock" class="styled-input">
 
-        <div class="section">
-            <label for="category"><h2>Category</h2></label>
-            
-            <input type="text" id="category" placeholder="Enter Category" class="styled-input">        </div>
+                </div>
+                <div class="input-group">
+                    <label for="price"><h2>Price:</h2></label>
+                    <input type="text" name="pprice" id="price" placeholder="Enter price" class="styled-input">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <label for="category">
+                        <h2>Category:</h2>
+                    </label>
+                    <input type="text" name="pcategory" id="category" placeholder="Enter category" class="styled-input">
+
+                </div>
+                <div class="input-group">
+                    <label for="order-limit"><h2>Order Limit:</h2></label>
+                    <input type="text" name="porderlim" id="order-limit" placeholder="Enter order limit" class="styled-input">
+                </div>
+            </div>
+
+            <!-- <div class="section">
+                <label for="expiry"><h2>Allergy Information</h2></label>
+                <input type="date" id="expiry" placeholder="Enter Category" class="styled-input">        
+            </div> -->
 
             <div class="section">
-                <label for="expiry"><h2>Expiry Date</h2></label>
-                
-                <input type="date" id="expiry" placeholder="Enter Category" class="styled-input">        </div>
-
-                <div class="section">
-                    <h2>Product Image</h2>
+                <h2>Product Image</h2>
+            </div>
+            <div class="chooseimage-container">
+                <div class="right-side">
+                    <label class="image-label" for="pimage">
+                        <div class="card-row">
+                            <div class="card">
+                                <div class="icon">+</div>
+                            </div>
+                        </div>
+                    </label>
+                    <input name="pimage" id="pimage" type="file">
                 </div>
-            
-                <div class="card-row">
-                    <div class="card">
-                        <div class="icon">+</div>
-                    </div>
-                    <div class="card">
-                        <div class="icon">+</div>
-                    </div>
-                    <div class="card">
-                        <div class="icon">+</div>
-                    </div>
-                    <div class="card">
-                        <div class="icon">+</div>
-                    </div>
+                <div class="imageview">
+                    <div id="file-name"></div>
+                    <img id="image-preview" width="160px" height="160px" src="#" alt="Image Preview" style="display: none;">
                 </div>
-                <button class="save-button">Save</button>
-
-                
+            </div>
+            <button type="submit" name="submit" class="save-button">Save</button>
+        </form>
     </div>
+    <script>
+        document.getElementById('pimage').addEventListener('change', function() {
+            const fileInput = this;
+            const fileNameDisplay = document.getElementById('file-name');
+            const imagePreview = document.getElementById('image-preview');
 
-   
+            const file = fileInput.files[0];
+            if (file) {
+                
 
-
-
+                // Check if the selected file is an image
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+            } 
+            else {
+                fileNameDisplay.textContent = '';
+                imagePreview.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

@@ -59,7 +59,7 @@
             
         <?php
             $query_order_id = "SELECT * FROM USER_ORDER WHERE USER_ID = :user_id";
-            $query_order_data = "SELECT * FROM ORDER1 WHERE ORDER_ID = :order_id";
+            $query_order_data = "SELECT * FROM ORDERS WHERE ORDER_ID = :order_id";
             $query_product_id = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = :order_id";
             $query_product_data = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = :product_id";
             $order_id_stmt = oci_parse($conn, $query_order_id);
@@ -109,7 +109,7 @@
             }
 
             // Free the statement and close the connection
-            oci_free_statement($order_id_stmt);
+            oci_close($conn);
 
         ?>
     </table>
