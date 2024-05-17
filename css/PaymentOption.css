@@ -105,6 +105,7 @@ table td{
     color: white;
     padding-block: 10px;
     border-radius: 10px;
+    border-width: 0.8px;
     margin-top: 20px;
     font-size: 1.2rem;
     transition: 0.2s ease-in;

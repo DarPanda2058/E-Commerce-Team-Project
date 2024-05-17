@@ -37,9 +37,10 @@
         </ul>
     </nav>
 
-
-    <h2>Your Order History</h2>
-    <h3>ALL(2)</h3>
+    <div class="order-header">
+        <h2>Your Order History</h2>
+        <h3>ALL(2)</h3>
+    </div>
     
     <table>
         <tr>
