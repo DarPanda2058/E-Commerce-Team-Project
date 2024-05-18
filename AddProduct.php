@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     </label>
-                    <input name="pimage" id="pimage" type="file">
+                    <input name="pimage" id="pimage" type="file" required>
                 </div>
                 <div class="imageview">
                     <div id="file-name"></div>
@@ -85,7 +85,7 @@
             const file = fileInput.files[0];
             if (file) {
                 
-
+                fileNameDisplay.textContent = file.name;
                 // Check if the selected file is an image
                     const reader = new FileReader();
                     reader.onload = function(e) {

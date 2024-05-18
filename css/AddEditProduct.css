@@ -79,6 +79,7 @@ h2 {
     margin-bottom: 5px; /* Add some space between label and input */
 }
 
+
 .styled-input {
     width: calc(100% - 80px);
     margin: 0 auto;
@@ -119,7 +120,8 @@ h2 {
     cursor: pointer;
 }
 #pimage{
-    display: none;
+    padding-left: 40px;
+    width: 200px;
 }
 .chooseimage-container{
     display: flex;
@@ -127,12 +129,11 @@ h2 {
 }
 #file-name{
     text-align: center;
-    padding-left: 10px;
 }
 .imageview{
+    margin-left: 47px;
     position: absolute;
-    display: block;
-    margin-left: 46px;
+    margin-bottom: 15px;
 }
 .save-button {
     width: 100px;

@@ -57,9 +57,7 @@
                 <label for="category"><h2>Category</h2></label>
                 
                 <input type="date" id="category" placeholder="Enter Category" class="styled-input">        </div>
-                <button class="save-button">Save</button>
-
-                
+                <button class="save-button">Save</button>   
     </div>
 
     

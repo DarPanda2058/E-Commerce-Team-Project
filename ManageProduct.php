@@ -73,7 +73,7 @@
                             }
                         echo '</td>';
                         echo '    <td><button class="order-delete-button"><a href="DeleteProduct.php?ID='.$row['PRODUCT_ID'].'">Delete</a></button></td>';
-                        echo '    <td><button class="order-modify-button"><a href="ModifyProduct.php?ID='.$row['PRODUCT_ID'].'">Modify</a></button></td>';
+                        echo '    <td><button class="order-modify-button"><a href="EditProduct.php?ID='.$row['PRODUCT_ID'].'">Edit</a></button></td>';
                         echo '</tr>';
                     }
                 oci_close($conn);
