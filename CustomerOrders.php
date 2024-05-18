@@ -11,34 +11,7 @@
       include("connect.php");      
     ?>
 <body>
-    <nav class="nav-bar">
-        <ul class="menu">
-            <li class="drop-hover">
-                <div class="category">
-                    <a href="">Categories <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                    <ul class="drop-content">
-                        <li><a href="">Option 1</a></li>
-                        <li><a href="">Option 2</a></li>
-                        <li><a href="">Option 3</a></li>
-                    </ul>
-                </div>
-                <div class="search-box">
-                    <img src="images/search.png" width="30px" height="30px" alt="search button">
-                    <input type="text" placeholder="  Search">
-                </div>
-            </li>
-            <li><img src="images/logo.png" height="55px" width="55px" alt="LOGO"></li>
-            <li class="account">
-                <span>Welcome User</span>
-                <div class="cart-container">
-                    <img src="images/shopping-cart.png" width="25px" height="25px" alt="Cart">
-                    <span>Cart</span>
-                    <span id="items_in_cart">1</span>
-                </div>
-                <img src="images/user.png" height="40px" width="40px" alt="">
-            </li>
-        </ul>
-    </nav>
+    <?php include("nav.php")?>
 
     <div class="order-header">
         <h2>Your Order History.</h2>
@@ -67,7 +40,7 @@
             $product_id_stmt = oci_parse($conn, $query_product_id);
             $product_data_stmt = oci_parse($conn, $query_product_data);
             
-            $user_id = 10;
+            $user_id = 12;
             oci_bind_by_name($order_id_stmt,':user_id',$user_id);
             
 
@@ -109,6 +82,7 @@
             }
 
             // Free the statement and close the connection
+            oci_free_statement($product_data_stmt);
             oci_close($conn);
 
         ?>

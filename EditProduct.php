@@ -8,45 +8,7 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <ul class="left">
-        <li class="dropdown">
-            <a href="#" class="dropbtn">Categories</a>
-            <div class="dropdown-content">
-                <a href="#">Category 1</a>
-                <a href="#">Category 2</a>
-                <a href="#">Category 3</a>
-            </div>
-        </li>
-    </ul>
-    <div class="search-wrapper">
-        <div class="search-icon">
-            <img src="images/search.png" alt="Search" class="searchicon">
-        </div>
-        <div class="search-container">
-            <input type="text" placeholder="Search">
-        </div>
-    </div>
-  
-
-    <div class="logo">
-        <img src="images/logo.png" alt="Logo" class="logoicon">
-    </div>
-    <div class="right">
-        <span>Welcome User</span>
-        <div class="cart-container">
-            <div class="cart-icon">
-                <img src="images/shopping-cart.png" alt="Cart" class="icon">
-                <span class="badge">1</span>
-            </div>
-            <span>Cart</span>
-        </div>
-        <div class="profile-icon">
-            <img src="images/user.png" alt="Profile" class="icon">
-        </div>
-    </div>
-</nav>
-
+<?php include("nav.php")?>
     <div class="container">
         <h1>Edit Product</h1>
         <div class="section">
