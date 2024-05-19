@@ -1,0 +1,477 @@
+
+
+
+
+.title {
+    font-size: 2.5rem;
+    margin-top: 20px;
+    color: #333;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    margin: 10px 0;
+}
+
+.about-butcher {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.b-game-card-rect {
+    flex: 1;
+    max-width: 600px;
+    height: 300px;
+    perspective: 1000px;
+    margin-right: 40px;
+}
+
+.b-game-card__cover-rect {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    will-change: transform;
+    transition: transform 0.35s ease-in-out;
+}
+
+.b-game-card__cover-rect:hover {
+    transform: scale(1.05);
+}
+
+.about-text {
+    flex: 1;
+    max-width: 600px;
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.l-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 30px;
+    margin: 30px auto;
+}
+
+@media screen and (max-width: 760px) {
+    .l-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.b-game-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding-bottom: 150%;
+    perspective: 1000px;
+}
+
+.b-game-card__cover {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+    transform-origin: top center;
+    will-change: transform;
+    transform: skewX(.001deg);
+    transition: transform .35s ease-in-out;
+}
+
+.b-game-card__cover::after {
+    display: block;
+    content: '';
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background: linear-gradient(226deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 35%, rgba(255,255,255,0.2) 42%, rgba(255,255,255,0) 60%);
+    transform: translateY(-20%);
+    will-change: transform;
+    transition: transform .65s cubic-bezier(0.18, 0.9, 0.58, 1);
+}
+
+.b-game-card:hover .b-game-card__cover {
+    transform: rotateX(7deg) translateY(-6px);
+}
+
+.b-game-card:hover .b-game-card__cover::after {
+    transform: translateY(0%);
+}
+
+.b-game-card::before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 6px 12px 12px rgba(0, 0, 0, 0.4);
+    will-change: opacity;
+    transform-origin: top center;
+    transform: skewX(.001deg);
+    transition: transform .35s ease-in-out, opacity .5s ease-in-out;
+}
+
+.b-game-card:hover::before {
+    opacity: 0.6;
+    transform: rotateX(7deg) translateY(-6px) scale(1.05);
+}
+
+.custom-btn {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 12px;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-16 {
+    border: none;
+    color: #000;
+}
+
+.btn-16:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    box-shadow:
+        -7px -7px 20px 0px #fff9,
+        -4px -4px 5px 0px #fff9,
+        7px 7px 20px 0px #0002,
+        4px 4px 5px 0px #0001;
+    transition: all 0.3s ease;
+}
+
+.btn-16:hover {
+    color: #000;
+}
+
+.btn-16:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+}
+
+.btn-16:active {
+    top: 2px;
+}
+
+.line-below-button {
+    width: 80%;
+    border-top: 2px solid #000;
+    margin-top: 10px;
+    margin-inline: auto;
+}
+
+.recommended {
+    padding: 40px 20px;
+}
+
+.recommended-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.recommended-text {
+    flex: 1;
+    max-width: 300px;
+    margin-right: 40px;
+    margin-top: 100px;
+}
+
+.recommended-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.recommended-text p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    flex: 2;
+}
+
+.product {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.product-image {
+    width: 100%;
+    height: 100px;
+    background-color: #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-info {
+    padding: 10px;
+}
+
+.product-info .stars {
+    color: #FFD700;
+}
+
+.product-info h3 {
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+.product-info p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.product {
+    width: 200px;
+    float: left;
+    height: 300px;
+    background: #fff;
+    margin: 1%;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.product:hover .product-info {
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.product-image {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.5s;
+}
+
+.product:hover .product-image {
+    filter: blur(3px) saturate(1.5);
+}
+
+.product-info {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    height: 0;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.product-info h2 {
+    border-bottom: 1px solid #818181;
+    padding-bottom: 1rem;
+}
+
+.product-info .price {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.product-info .descr {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+    line-height: 1.2rem;
+    font-weight: 600;
+}
+
+.product-info a p {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    line-height: 2.4rem;
+    background: #000;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin: 0;
+    transition: all 0.2s;
+}
+
+.product-info a p:hover {
+    filter: brightness(0.9);
+    letter-spacing: 4px;
+}
+
+.l-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product {
+    flex: 1 0 16%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+.about-butcher {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.b-game-card-rect {
+    flex: 1;
+    margin: 20px;
+}
+
+.b-game-card__cover-rect {
+    width: 400px;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+.about-text {
+    flex: 2;
+    margin: 20px;
+}
+
+.about-text h2 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 1.5em;
+    line-height: 1.6;
+}
+
+.recommended .recommended-text h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.recommended .recommended-text p {
+    font-size: 1.5em;
+    line-height: 1.6;
+}
+
+.recommended .product-info h3 {
+    font-size: 1.5em;
+}
+
+.recommended .product-info p {
+    font-size: 1.2em;
+}
+
+.custom-btn {
+    padding: 10px 20px;
+    font-size: 5mm;
+}
+
+.product .product-buttons {
+    display: block;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.product .product-buttons .btn {
+    padding: 5px 10px;
+    font-size: 1.2em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.product .product-buttons .btn.add-to-cart {
+    background-color: #007bff;
+}
+
+.product .descr {
+    font-size: 1.2em;
+    line-height: 1.4;
+}
+
+.allproduct{
+    width: 100%;
+    text-align: center;
+}
+.allproduct a{
+    text-decoration: none;
+    color: black;
+}
+#back-to-top{
+    font-size: 1.9rem;
+}

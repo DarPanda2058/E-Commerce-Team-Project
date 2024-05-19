@@ -13,14 +13,14 @@
 <div class="main-container">
     <div class="other-div">
         <div class="other-div">
-            <div style="margin-top: 100px;"> <img src="images/image.jpg" alt="Butcher Image" width="400" height="500" ></div>
+            <div> <img src="images/image.jpg" alt="Butcher Image"></div>
            
-            <h1>Butcher</h1>
-            <h4>All in one shop for meat</h4>
+            <h1><?php echo($_SESSION['shopName']);?></h1>
+            <h4><?php echo($_SESSION['shopDescription']);?></h4>
             <div class="buttons">
-                <button class="yellow-button">Account Info <span>&rarr;</span></button>
-                <button class="blue-button">Manage shop <span>&rarr;</span></button>
-                <button class="black-button">Change password <span>&rarr;</span></button>
+                <button class="yellow-button"><a href="#">Account Info</a><span>&rarr;</span></button>
+                <button class="yellow-button" id = "active">Manage shop<span>&rarr;</span></button>
+                <button class="yellow-button"><a href="#">Change password</a> <span>&rarr;</span></button>
             </div>
         </div>
     </div>  
@@ -29,35 +29,39 @@
         <h1>Manage Shop</h1>
         <div class="shop-info">
             <h2>Shop info</h2>
-            <button class="yellow-button">Manage Your Product</button>
+            <button class="yellow-button"><a href="ManageProduct.php">Manage Your Product</a></button>
         </div>
         
         <div class="section">
             <h2>Shop Name</h2>
-            <textarea class="description-field" placeholder="Enter Shop Name..."></textarea>
+            <input type="text" class="description-field" placeholder="Enter Shop Name..." value="<?php echo($_SESSION['shopName']);?>">
         </div>
         <div class="section">
             <h2>Shop Address</h2>
-            <textarea class="description-field" placeholder="Enter Shop Address..."></textarea>
+            <input type="text" class="description-field" placeholder="Enter Shop Address..." value="<?php echo($_SESSION['shopAddress']);?>">
         </div>
         
 
         <div class="section">
             <label for="category"><h2>PAN Number</h2></label>
             
-            <input type="text" id="category" placeholder="Enter PAN Number" class="styled-input">        </div>
+            <input type="text" id="category" placeholder="Enter PAN Number" class="styled-input" value="<?php echo($_SESSION['shopPan']);?>">        
+        </div>
 
             <div class="section">
                 <label for="expiry"><h2>Short Description</h2></label>
                 
-                <input type="date" id="expiry" placeholder="Enter Short Description" class="styled-input">        </div>
+                <textarea id="expiry" placeholder="Enter Short Description" class="styled-input"><?php echo($_SESSION['shopDescription']);?></textarea>       
+
+            </div>
 
               
             <div class="section">
                 <label for="category"><h2>Category</h2></label>
                 
-                <input type="date" id="category" placeholder="Enter Category" class="styled-input">        </div>
-                <button class="save-button">Save</button>   
+                <input type="text" id="category" placeholder="Enter Category" class="styled-input" value="<?php echo($_SESSION['shopCategory']);?>">       
+                <div class="right-btn"><button class="save-button">Save</button></div>   
+            </div>
     </div>
 
     

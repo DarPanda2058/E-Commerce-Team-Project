@@ -1,14 +1,12 @@
 
 
-.container {
-    flex: 0 0 60%; /* 60% width */
-}
 
-.other-div {
-    flex: 0 0 40%; /* 40% width */
-}
 .main-container{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    margin-bottom: 40px;
 
 }
 
@@ -26,13 +24,12 @@ p {
 /* Now for the body part */
 .container {
     width: 60%;
-    margin: 0 auto;
 }
 
 h1 {
     font-size: 40px;
     font-weight: bold;
-    margin-bottom: 50px;
+    margin-top: 0px;
 }
 
 h2 {
@@ -40,7 +37,7 @@ h2 {
 }
 
 .section {
-    margin-bottom: 40px; /* Add some space between sections */
+    margin-bottom: 15px; /* Add some space between sections */
 }
 
 .description-field {
@@ -129,7 +126,9 @@ h2 {
     font-size: 48px;
     color: #333;
 }
-
+.right-btn{
+    text-align: right;
+}
 .save-button {
     width: 100px;
     height: 50px;
@@ -140,8 +139,8 @@ h2 {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 40px;
-    margin-bottom: 100px;
+    margin-top: 20px;
+    
 }
 
 .shop-info {
@@ -152,7 +151,7 @@ h2 {
 
 .shop-info h2 {
     margin: 0; /* Remove default margin */
-    font-size: 30;
+    font-size: 30px;
 }
 
 .yellow-button {
@@ -171,11 +170,12 @@ h2 {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: auto;
 }
 
 .other-div img {
-    width: 400px;
-    height: 500px;
+    width: 350px;
+    height: 400px;
     object-fit: cover; /* To maintain aspect ratio */
     border-radius: 10px; /* Optional: Add border radius for rounded corners */
 }
@@ -203,18 +203,17 @@ h2 {
     justify-content: space-between;
     align-items: center;
 }
-
-.blue-button {
-    background-color: #3498db; /* Blue color */
-}
-
-.black-button {
-    background-color: #333; /* Black color */
-    color: white; /* Change text color to white */
+.yellow-button a, .shop-info a{
+    text-decoration: none;
+    color: black;
 }
 
 .yellow-button span, .blue-button span, .black-button span {
     margin-left: 5px; /* Adjust space between text and arrow */
+}
+#active{
+    background-color: #916322;
+    cursor: default;
 }
 
 

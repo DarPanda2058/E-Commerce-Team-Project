@@ -42,6 +42,7 @@
         </div>
     </div>
     <h2 class="sub-section">More By Shop</h2>
+    <center>
     <div class="recommendation-container">
             <div class="recommend-product">
                 <img src="images/product-recommendation.jpg" alt="">
@@ -74,6 +75,7 @@
                 <p class="small-font">Price</p>
             </div>
     </div>
+    </center>
     <h2 class="sub-section">Reviews</h2>
     <div class="review-container">
         <div class="reviews">
@@ -117,49 +119,10 @@
         </div>
     </div>
 
-    <hr>
-    <a href="" class="back-to-top">Back To Top</a>
-    <hr>
+    
 
+    <?php include('footer.html');?>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-row">
-                <div class="footer-col-map">
-                    <p>Find Us On Google Map</p>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d302041.7311267153!2d-2.0156918802937267!3d53.74139943878391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48791339c06b18f1%3A0x6517b5a23c63c194!2sWest%20Yorkshire%2C%20UK!5e0!3m2!1sen!2snp!4v1714306052815!5m2!1sen!2snp" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <div class="footer-col">
-                    <h4>Menue</h4>
-                    <ul>
-                        <li><a href="">Home</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Shop</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Traders</h4>
-                    <ul>
-                        <li><a href="">Profile</a></li>
-                        <li><a href="">Profile</a></li>
-                        <li><a href="">Profile</a></li>
-                        <li><a href="">Profile</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Find Us On</h4>
-                    <div class="footer-social">
-                        <ul>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
     <!-- Slick Slider -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
