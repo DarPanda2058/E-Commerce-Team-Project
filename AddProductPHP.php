@@ -1,5 +1,6 @@
 <?php
-    include('connect.php')
+    include('connect.php');
+    session_start();
 ?>
 
 <?php
@@ -36,18 +37,22 @@ if(isset($_POST['submit'])){
     // }
 
     $destination = "images/" . $pimage; 
+    $shop_id = $_SESSION['shopID'];
     if (move_uploaded_file($image_temp, $destination)){
-        $query = "INSERT INTO PRODUCT(PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_CATEGORY,PRODUCT_MAX_LIMIT,PRODUCT_DETAILS,PRODUCT_QUANTITY,PRODUCT_STATUS,SHOP_ID) VALUES('$pname','$pprice','$pimage','$pcategory','$porderlim','$pdesc','$pstock',1,102)";
+        $query = "INSERT INTO PRODUCT(PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_CATEGORY,PRODUCT_MAX_LIMIT,PRODUCT_DETAILS,PRODUCT_QUANTITY,PRODUCT_STATUS,SHOP_ID) VALUES('$pname','$pprice','$pimage','$pcategory','$porderlim','$pdesc','$pstock',0,'$shop_id')";
         $insertstmt = oci_parse($conn,$query);
         if(oci_execute($insertstmt)){
             echo'<script>alert("Data Inserted Successfully!")</script>';
     
-            header('Location: ManageProduct.php');
+            $target_url = "ManageProduct.php";
+            echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
             
         }else{
             echo'<script>alert("ERROR: Data Not Inserted'.oci_error($insertstmt).'")</script>';
     
-            header('Location: AddProduct.php');
+
+            $target_url = "AddProduct.php";
+            echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
             
         }
     }

@@ -26,7 +26,7 @@
         $product_max = $row['PRODUCT_MAX_LIMIT'];
         $product_stock = $row['PRODUCT_QUANTITY'];
         $product_status = $row['PRODUCT_STATUS'];
-        $product_allergy = $row['ALLERGY_INFO'];
+        $product_allergy = $row['ALLERGY_INFORMATION'];
         $product_category = $row['PRODUCT_CATEGORY'];
 
     ?>
@@ -43,6 +43,10 @@
             <div class="section">
                 <h2>Product Description</h2>
                 <textarea name="pdesc" class="description-field-big" placeholder="Enter description..."><?php echo($product_desc);?></textarea>
+            </div>
+            <div class="section">
+                <h2>Allergy Information</h2>
+                <textarea name="pdesc" class="description-field-big" placeholder="Enter description..."><?php echo($product_allergy);?></textarea>
             </div>
             <div class="row">
                 <div class="input-group">

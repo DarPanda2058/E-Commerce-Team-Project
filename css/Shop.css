@@ -475,3 +475,33 @@ hr {
 #back-to-top{
     font-size: 1.9rem;
 }
+@media screen and (max-width: 1200px) {
+    .l-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .l-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .l-container {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-bar {
+        flex-direction: column;
+    }
+
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .category, .search-box, .account {
+        margin-bottom: 10px;
+    }
+}

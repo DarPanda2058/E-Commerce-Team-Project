@@ -20,6 +20,7 @@ if (isset($_POST['registerBtn'])) {
     $role = $_POST['role'];
     $status = "1";
     $time = date("d-M-y h:i:s");
+    $image = "default-image.png";
 
     $error = 0;
     // Session
@@ -70,8 +71,8 @@ if (isset($_POST['registerBtn'])) {
 
     if ($error == 0) {
         
-        $query = "INSERT INTO USERS (USER_FIRST_NAME, USER_LAST_NAME, USER_PHONE, USER_EMAIL, USER_PASSWORD, USER_TYPE, USER_CREATED_TIME, USER_STATE)
-                  VALUES (:fname, :lname, :phone, :email, :password, :role, TO_DATE(:time, 'DD-MON-YY HH24:MI:SS'), :status)";
+        $query = "INSERT INTO USERS (USER_FIRST_NAME, USER_LAST_NAME, USER_PHONE, USER_EMAIL, USER_PASSWORD, USER_TYPE, USER_CREATED_TIME, USER_STATE,USER_IMAGE)
+                  VALUES (:fname, :lname, :phone, :email, :password, :role, TO_DATE(:time, 'DD-MON-YY HH24:MI:SS'), :status,'default-image.png')";
         $register_stmnt = oci_parse($conn, $query);
 
         oci_bind_by_name($register_stmnt, ':fname', $fname);
@@ -82,6 +83,7 @@ if (isset($_POST['registerBtn'])) {
         oci_bind_by_name($register_stmnt, ':role', $role);
         oci_bind_by_name($register_stmnt, ':time', $time);
         oci_bind_by_name($register_stmnt, ':status', $status);
+
 
         if (oci_execute($register_stmnt)) {
             

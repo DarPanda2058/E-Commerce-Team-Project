@@ -22,6 +22,7 @@ if (isset($_POST['submit'])) {
             // Prepare the query to update the product with the new image
             $query = "UPDATE PRODUCT SET 
                       PRODUCT_NAME = :pname,
+                      PRODUCT_ID = :pid,
                       PRODUCT_PRICE = :pprice,
                       PRODUCT_IMAGE = :pimage,
                       PRODUCT_CATEGORY = :pcategory,
@@ -68,11 +69,13 @@ if (isset($_POST['submit'])) {
     // Execute the statement
     if (oci_execute($updatestmt)) {
         echo '<script>alert("Data Updated Successfully!")</script>';
-        header('Location: ManageProduct.php');
+        $target_url = "ManageProduct.php";
+        echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
         exit;
     } else {
         echo '<script>alert("ERROR: Data Not Updated. ' . oci_error($updatestmt) . '")</script>';
-        // header('Location: AddProduct.php');
+        $target_url = "AddProduct.php";
+        echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
         exit;
     }
 }

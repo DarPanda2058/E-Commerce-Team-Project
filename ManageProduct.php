@@ -19,8 +19,9 @@
 
         $query_product_data = "SELECT*FROM PRODUCT WHERE SHOP_ID = :shop_id";
         $query_product_status = "SELECT 
-                                    SUM(CASE WHEN PRODUCT_STATUS = 0 THEN 1 ELSE 0 END) AS APPROVED_COUNT,
-                                    SUM(CASE WHEN PRODUCT_STATUS = 1 THEN 1 ELSE 0 END) AS NOT_APPROVED_COUNT
+                                    SUM(CASE WHEN PRODUCT_STATUS = 1 THEN 1 ELSE 0 END) AS APPROVED_COUNT,
+                                    SUM(CASE WHEN PRODUCT_STATUS = 0 THEN 1 ELSE 0 END) AS NOT_APPROVED_COUNT,
+                                    COUNT(*) AS TOTAL_PRODUCTS
                                 FROM 
                                     PRODUCT
                                 WHERE 
@@ -40,6 +41,7 @@
         if($row = oci_fetch_assoc($product_status_stmt)){
             $approved = $row['APPROVED_COUNT'];
             $not_approved = $row['NOT_APPROVED_COUNT'];
+            $total_products = $row['TOTAL_PRODUCTS'];
             if($approved == null){
                 $approved = 0;
             }
@@ -52,7 +54,7 @@
         <h2>Manage Your Product.</h2>
         <div class="status-add">
             <div class="status-row">
-                <h3>ALL(2)</h3>
+                <h3>ALL(<?php echo $total_products;?>)</h3>
                 <h3 class="green">Online(<?php echo $approved;?>)</h3>
                 <h3 class="red">Pending-Review(<?php echo $not_approved;?>)</h3>
             </div>
@@ -87,7 +89,7 @@
                 echo '    <td class="product-price">&pound; '.$product_price.'</td>';
                 echo '    <td class="order-limit">'.$product_max.'</td>';
                 echo '<td class = "status">';
-                    if ($product_status == 1) {
+                    if ($product_status == 0) {
                         echo '<button class="pending-approval">Pending Approval</button>';
                     } else {
                         echo '<button class="approved">Approved</button>';

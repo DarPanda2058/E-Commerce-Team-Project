@@ -25,9 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $_SESSION['userID'] = $row['USER_ID'];
             $_SESSION['email'] = $email; 
             $_SESSION['role'] = $row['USER_TYPE'];
-            $_SESSION['id'] = $row['USER_ID'];
             $_SESSION['fname'] = $row['USER_FIRST_NAME'];
             $_SESSION['lname'] = $row['USER_LAST_NAME'];
+            $_SESSION['phone'] = $row['USER_PHONE'];
+            $_SESSION['address'] = $row['USER_ADDRESS'];
+            $_SESSION['image'] = $row['USER_IMAGE'];
             $userID = $_SESSION['userID'];
             $userEmail = $_SESSION['email'];
             $shopid_query = "SELECT COUNT(*) AS COUNT FROM SHOP WHERE USER_ID = $userID";
@@ -36,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $shop_row = oci_fetch_array($shopid_stmt);
             //creating shop for new traders
             if($shop_row['COUNT'] == 0){
-                $shop_query = "INSERT INTO SHOP(SHOP_EMAIL,USER_ID)VALUES('$userEmail','$userID')";
+                $shop_query = "INSERT INTO SHOP(SHOP_EMAIL,USER_ID,SHOP_LOGO)VALUES('$userEmail','$userID','default-image.png')";
                 $shop_stmt = oci_parse($conn,$shop_query);
                 oci_execute($shop_stmt);
             }
