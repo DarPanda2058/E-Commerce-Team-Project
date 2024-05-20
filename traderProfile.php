@@ -29,7 +29,7 @@
             <div class="buttons">
                 <button class="yellow-button" id = "active">Account Info<span>&rarr;</span></button>
                 <button class="yellow-button" ><a href="ManageShop.php">Manage Shop</a><span>&rarr;</span></button>
-                <button class="yellow-button" ><a href="#">Change Password</a> <span>&rarr;</span></button>
+                <button class="yellow-button" ><a href="changePass.php">Change Password</a> <span>&rarr;</span></button>
             </div>
         </div>
     </div>  
@@ -117,9 +117,6 @@
         });
     </script>
 
-<div class="buttons">
-  <button class="fill">Fill In</button>
-  <button class="raise">Raise</button>
-</div>
+
 </body>
 </html>

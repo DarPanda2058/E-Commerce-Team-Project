@@ -74,7 +74,9 @@ if (isset($_POST['registerBtn'])) {
         $query = "INSERT INTO USERS (USER_FIRST_NAME, USER_LAST_NAME, USER_PHONE, USER_EMAIL, USER_PASSWORD, USER_TYPE, USER_CREATED_TIME, USER_STATE,USER_IMAGE)
                   VALUES (:fname, :lname, :phone, :email, :password, :role, TO_DATE(:time, 'DD-MON-YY HH24:MI:SS'), :status,'default-image.png')";
         $register_stmnt = oci_parse($conn, $query);
-
+        
+        //passwordSecurity
+        // $password = password_hash($password, PASSWORD_BCRYPT);
         oci_bind_by_name($register_stmnt, ':fname', $fname);
         oci_bind_by_name($register_stmnt, ':lname', $lname);
         oci_bind_by_name($register_stmnt, ':phone', $phone);

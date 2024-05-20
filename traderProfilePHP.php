@@ -63,7 +63,6 @@ if (isset($_POST['shopSave'])) {
         // Updating the session variables
         $_SESSION['fname'] = $fname;
         $_SESSION['lname'] = $lname;
-
         $_SESSION['phone'] = $tphone;
         $_SESSION['address'] = $taddress;
         $_SESSION['image'] = $timage;

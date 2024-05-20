@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
                   PRODUCT_MAX_LIMIT = :porderlim,
                   PRODUCT_DETAILS = :pdesc,
                   PRODUCT_QUANTITY = :pstock,
-                  PRODUCT_STATUS = 1
+                  PRODUCT_STATUS = 0
                   WHERE PRODUCT_ID = :pid";
     }
 

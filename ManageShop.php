@@ -29,7 +29,7 @@
             <div class="buttons">
                 <button class="yellow-button"><a href="traderProfile.php">Account Info</a><span>&rarr;</span></button>
                 <button class="yellow-button" id = "active">Manage shop<span>&rarr;</span></button>
-                <button class="yellow-button"><a href="#">Change password</a> <span>&rarr;</span></button>
+                <button class="yellow-button"><a href="changePass.php">Change password</a> <span>&rarr;</span></button>
             </div>
         </div>
     </div>  

@@ -1,67 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Change Password</title>
-<link rel="stylesheet" href="styleC.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Profile</title>
+    <link rel="stylesheet" href="css/ManageShop.css">
 </head>
 <body>
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $oldPassword = htmlspecialchars($_POST['oldPassword']);
-    $newPassword = htmlspecialchars($_POST['newPassword']);
-    $confirmNewPassword = htmlspecialchars($_POST['confirmNewPassword']);
-    if ($newPassword === $confirmNewPassword) {
-        echo "<p>Password changed successfully!</p>";
-    } else {
-        echo "<p>New passwords do not match. Please try again.</p>";
-    }
-}
-?>
+<?php include("nav.php")?>
 
-<div class="container">
-    <div class="profile">
-        <div class="profile-section">
-            <h1>Your Profile</h1>
-        </div>
-        <div class="profile-header">
-            <img src="profile-pic.jpg" alt="Profile Picture">
-            <h2>John Doe</h2>
-            <p class="profile-email">johndoe@example.com</p>
-        </div>
-        <button class="account-info-btn">Account Info</button>
-        <div class="manage-shop">
-            <button class="manage-shop-btn">Manage Shop</button>
-        </div>
-        <div class="change-password">
-            <button class="change-password-btn">Change Password</button>
-        </div>
-    </div>
+<div class="main-container">
+    <div class="other-div">
+        <div class="other-div">
+            
+            <div> 
+                <div>
+                    <img id="image-preview" src="images/<?php echo $_SESSION['image'];?>">
+                </div>
 
-    <div class="change-password">
-        <div class="password">
-            <h2>Change Password <button class="access-your-dashboard-btn">Access Your Dashboard</button></h2>
+                
+                
+                
+            </div>
+            
+           
+            <h1><?php echo($_SESSION['fname']." ".$_SESSION['lname']);?></h1>
+            <div class="buttons">
+                <button class="yellow-button" ><a href="<?php 
+                    if($_SESSION['role'] == 'trader'){
+                        echo "traderProfile.php";
+                    }else if($_SESSION['role'] == 'customer'){
+                        echo "customerProfile.php";
+                    }else{
+                        echo "adminProfile.php";
+                    }
+                ?>">Account Info</a><span>&rarr;</span></button>
+                <button class="yellow-button" ><a href="ManageShop.php">Manage Shop</a><span>&rarr;</span></button>
+                <button class="yellow-button" id = "active">Change Password<span>&rarr;</span></button>
+            </div>
         </div>
-       
-        <form method="POST" action="">
-            <div class="old-password">
-                <label for="oldPassword">Old Password</label>
-                <input type="password" id="oldPassword" name="oldPassword" required>
+    </div>  
+
+        
+
+    <div class="container">
+        <h1>Change Password</h1>
+        <div class="shop-info">
+            <h2>Password Info</h2>
+            <button class="yellow-button"><a href="ManageProduct.php">Access Your Dashboard</a></button>
+        </div>
+        <form action="changePassPHP.php" method="post">
+            <div class="section">
+                <label for="currentPass"><h2>Current Password</h2></label>
+                <input type="password" name="currentPass" id="currentPass" placeholder="Enter Current Password" class="styled-input">  
             </div>
-            <div class="new-password">
-                <label for="newPassword">New Password</label>
-                <input type="password" id="newPassword" name="newPassword" required>
+
+            <div class="section">
+                <label for="newPass"><h2>New Password</h2></label>
+                <input type="password" name="newPass" id="newPass" placeholder="Enter New Password" class="styled-input">        
             </div>
-            <div class="confirm-new-password">
-                <label for="confirmNewPassword">Confirm New Password</label>
-                <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
-            </div>
-            <button type="submit" class="save-btn">Save</button>
+
+                <div class="section">
+                    <label for="confirmPass"><h2>Confirm Password</h2></label>
+                    <input type="password" name="confirmPass" id="confirmPass" placeholder="Confirm New Password" class="styled-input">     
+
+                </div>
+                <div class="section">     
+                    <div class="right-btn"><button type="submit" class="save-button" name="changePass" >Save</button></div>   
+                </div>
         </form>
     </div>
+
+    
+    
+
 </div>
+
+
+   
+<script>
+        document.getElementById('timage').addEventListener('change', function() {
+            const fileInput = this;
+            const fileNameDisplay = document.getElementById('file-name');
+            const imagePreview = document.getElementById('image-preview');
+
+            const file = fileInput.files[0];
+            if (file) {
+                
+
+                // Check if the selected file is an image
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+            } 
+            else {
+                fileNameDisplay.textContent = '';
+                imagePreview.style.display = 'none';
+            }
+        });
+    </script>
+
 
 </body>
 </html>
