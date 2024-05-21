@@ -218,14 +218,16 @@ hr {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
-    align-items: flex-start;
+    align-items: center;
+    gap: 125px;
 }
 
 .recommended-text {
-    flex: 1;
     max-width: 300px;
-    margin-right: 40px;
-    margin-top: 100px;
+    /* margin-right: 40px; */
+    text-align: center;
+    /* margin-top: 100px; */
+    flex: 1;
 }
 
 .recommended-text h2 {
@@ -287,6 +289,7 @@ hr {
 }
 
 .product {
+    min-width: 160px;
     width: 200px;
     float: left;
     height: 300px;
@@ -369,7 +372,12 @@ hr {
 .product {
     flex: 1 0 16%;
     margin: 0%;
+    /* align-items: center; */
+    max-width: 450px;
+    text-align: center;
     box-sizing: border-box;
+    /* align-self: center; */
+    margin: auto;
 }
 
 .about-butcher {
@@ -394,7 +402,7 @@ hr {
 
 .b-game-card__cover-rect {
     width: 400px;
-    height: 300px;
+    height: 310px;
     background-size: cover;
     background-position: center;
 }
@@ -440,7 +448,7 @@ hr {
 .product .product-buttons {
     display: block;
     justify-content: space-between;
-    margin-top: 50px;
+    margin-top: 15px;
 }
 
 .product .product-buttons .btn {
@@ -462,6 +470,8 @@ hr {
 .product .descr {
     font-size: 1.2em;
     line-height: 1.4;
+    max-height: 100px;
+    overflow: hidden;
 }
 
 .allproduct{
@@ -504,4 +514,24 @@ hr {
     .category, .search-box, .account {
         margin-bottom: 10px;
     }
+}
+.trending{
+    max-width: 1200px;
+    display: flex;
+    /* flex-direction: row; */
+    align-items: center;
+    /* margin: auto; */
+    flex-wrap: wrap;
+    margin: auto;
+    gap: 5px;
+}
+.headline{
+    flex: 2;
+}
+.similar-products{
+    width: 40%;
+    text-align: center;
+}
+#product-trending{
+    flex: 1 0 30%;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trader Profile</title>
+    <title>Change Password</title>
     <link rel="stylesheet" href="css/ManageShop.css">
 </head>
 <body>
@@ -27,16 +27,12 @@
            
             <h1><?php echo($_SESSION['fname']." ".$_SESSION['lname']);?></h1>
             <div class="buttons">
-                <button class="yellow-button" ><a href="<?php 
+                <button class="yellow-button" ><a href="userProfile.php">Account Info</a><span>&rarr;</span></button>
+                <?php
                     if($_SESSION['role'] == 'trader'){
-                        echo "traderProfile.php";
-                    }else if($_SESSION['role'] == 'customer'){
-                        echo "customerProfile.php";
-                    }else{
-                        echo "adminProfile.php";
-                    }
-                ?>">Account Info</a><span>&rarr;</span></button>
+                ?>
                 <button class="yellow-button" ><a href="ManageShop.php">Manage Shop</a><span>&rarr;</span></button>
+                <?php }?>
                 <button class="yellow-button" id = "active">Change Password<span>&rarr;</span></button>
             </div>
         </div>

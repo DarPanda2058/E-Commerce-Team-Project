@@ -13,19 +13,28 @@
         <title>Product</title>
     </head>
 <body>
-    <?php include("nav.php")?>
+    <?php 
+        include("nav.php");
+        include('connect.php');
+
+        $product_id = $_GET['id'];
+        $product_query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$product_id'";
+        $product_stmt = oci_parse($conn,$product_query);
+        oci_execute($product_stmt);
+        $product_row = oci_fetch_assoc($product_stmt);
+    ?>
     <div class="product-container">
         <div class="product-image">
-            <img src="images/product.jpg" alt="Product Image">
+            <img src="images/<?php echo $product_row['PRODUCT_IMAGE'] ; ?>" alt="Product Image">
         </div>
         <div class="product-details">
-            <h2>Product Title</h2>
+            <h2><?php echo $product_row['PRODUCT_NAME'] ; ?></h2>
             <div class="star-rating">
                 <p class="small-font">Star-Review</p>
                 <p class="small-font">5 Reviews</p>
             </div>
             <hr>
-            <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore consectetur consequuntur necessitatibus recusandae dolores dicta voluptatibus modi repudiandae vel natus nobis molestiae vero quas soluta al. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem enim pariatur, officia, quaerat in nemo, reprehenderit est magni ex molestiae debitis? Sit molestias veniam laborum commodi libero veritatis necessitatibus dolor.</p>
+            <p class="description"><?php echo $product_row['PRODUCT_DETAILS'] ; ?></p>
             <div class="quantity-price">
                 <div class="quantity">
                     <button>&nbsp;+</button>
@@ -33,7 +42,7 @@
                     <button>-&nbsp;</button>
                 </div>
                 <p class="stock-status">In Stock</p>
-                <p class="price">$1234</p>
+                <p class="price">&pound;<?php echo $product_row['PRODUCT_PRICE'] ; ?></p>
             </div>
             <div class="buy-cart-buttons">
                 <a href=""><button>BUY NOW</button></a>

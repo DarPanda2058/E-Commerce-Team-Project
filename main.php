@@ -3,46 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Products</title>
+    <title>Home Page</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/Shop.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
     <header>
-       <?php include('nav.php');?>
-       <?php include('connect.php'); ?>
+        <?php 
+            include('nav.php'); 
+            include('connect.php');
+        ?>
     </header>
-    <?php 
-        $shop_id = $_GET['id'];
-        $shop_name = $_GET['name'];
-        $shop_query = "SELECT * FROM SHOP WHERE SHOP_ID = '$shop_id'";
-        $shop_stmt = oci_parse($conn,$shop_query);
-        oci_execute($shop_stmt);
-        $shop_row = oci_fetch_assoc($shop_stmt);
-
-
-        $product_query = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$shop_id'";
-        $product_stmt = oci_parse($conn,$product_query);
-        oci_execute($product_stmt);
-        $noofproducts = 5;
-    ?>
 
     <center>
-        <h1 class="title" style="font-size: 4rem;font-weight: 600;"><?php echo $shop_name; ?></h1>
-        <h1>Products</h1>
+        <h1 class="title" style="font-size: 4rem;font-weight: 600;">Headline</h1>
+        <h1>Sub-headline</h1>
         <hr width="5%">
     </center>
-
     <div class="headline">
         <div class="l-container">
 
             <?php 
-
+                $product_query = "SELECT * FROM PRODUCT";
+                $product_stmt = oci_parse($conn,$product_query);
+                oci_execute($product_stmt);
+                $noofproducts = 10;
 
                 while(($row = oci_fetch_assoc($product_stmt)) && $noofproducts>0 ){
             ?>
@@ -61,40 +49,54 @@
             <?php $noofproducts--; } ?>
             
             <div class="allproduct">
-                <button class="custom-btn btn-16"><a href="AllProductShop.php?id=<?php echo $shop_id; ?>&name=<?php echo $shop_name; ?>">See More</a></button>
-                <hr class="line-below-button">
+                <button class="custom-btn btn-16"><a href="AllProduct.php">See More</a></button>
+
             </div>
+            <hr class="line-below-button">
         </div>
 
     </div>
-    <section class="about-butcher">
-        <div class="about-container">
-            <div class="b-game-card-rect">
-                <div class="b-game-card__cover-rect" style="background-image: url(images/<?php echo $shop_row['SHOP_LOGO']; ?>);"></div>
-            </div>
-            <div class="about-text">
-                <h2>About <?php echo $shop_name; ?></h2>
-                <p><?php echo $shop_row['SHOP_CATEGORY']; ?></p>
-                <p><?php echo $shop_row['SHOP_DESCRIPTION']; ?></p>
-            </div>
-        </div>
-    </section>
 
-    <!-- <center>
-        <button class="custom-btn btn-16">Read More</button>
-        <hr class="line-below-button">
-    </center> -->
-    
-    <section class="trending">
-        <div class="similar-products">
-            <h1>Recommended by <?php echo $shop_row['SHOP_NAME'];?></h1>
-            <p>Lorem ipsum dolor sit amet consectetur. Consectetur faucibus tristique eu magna curabitur.</p>
-        </div>
+
+    <div class="container-fluid">
+        <h1 align = 'center'>Shop</h1>
+        <hr>
         <div class="headline">
             <div class="l-container">
 
                 <?php 
-                    $product_query = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$shop_id' ORDER BY DBMS_RANDOM.VALUE";
+                    $shop_query = "SELECT * FROM SHOP";
+                    $shop_stmt = oci_parse($conn,$shop_query);
+                    oci_execute($shop_stmt);
+
+                    while(($row = oci_fetch_assoc($shop_stmt))){
+                ?>
+                <div class="product" style="flex: 30%;">
+                <div class="product-image" style="background-image: url(images/<?php echo $row['SHOP_LOGO'] ?>);"></div>
+                    <div class="product-info">
+                        <h2><?php echo $row['SHOP_NAME'] ?></h2>
+                        <p class="price"><?php echo $row['SHOP_CATEGORY'] ?></p>
+                        <p class="descr"><?php echo $row['SHOP_STATUS'] ?></p>
+                        <div class="product-buttons">
+                            <a href="Shop.php?id=<?php echo $row['SHOP_ID']; ?>&name=<?php echo $row['SHOP_NAME'] ;?>" class="btn buy">Visit Now</a>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+
+        </div>
+    </div>
+
+    <hr> 
+
+    <section class="trending">
+        <h1 style="width: 40%;">Trending</h1>
+        <div class="headline">
+            <div class="l-container">
+
+                <?php 
+                    $product_query = "SELECT * FROM PRODUCT ORDER BY DBMS_RANDOM.VALUE";
                     $product_stmt = oci_parse($conn,$product_query);
                     oci_execute($product_stmt);
                     $noofproducts = 6;
@@ -118,9 +120,20 @@
 
         </div>
     </section>
-    
 
-    
+<hr> 
+<br><br>
+<hr class="line-below-button">
+    <center>
+        <div class="about-us">
+            <h1>About Us</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nostrum cum provident. Est debitis voluptatibus ab natus? Deleniti eos velit delectus magnam nemo? Voluptate fugit magni est aliquam, perspiciatis dignissimos?</p>
+        </div>
+        <hr class="line-below-button">
+    </center>
+
+
+    <?php include('footer.html'); ?>
     <script>
         $(document).ready(function(){
             $('#itemslider').carousel({ interval: 3000 });
@@ -142,6 +155,5 @@
             });
         });
     </script>
-<?php include('footer.html');?>
 </body>
 </html>

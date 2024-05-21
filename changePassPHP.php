@@ -39,7 +39,7 @@ if (isset($_POST['changePass'])) {
 
             if (oci_execute($updateStmt)) {
                 echo '<script>alert("Password Updated Successfully!")</script>';
-                $target_url = "traderProfile.php";
+                $target_url = "userProfile.php";
                 echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
                 exit;
             } else {
@@ -57,7 +57,7 @@ if (isset($_POST['changePass'])) {
     } else {
         echo '<script>alert("ERROR: User not found.")</script>';
         echo oci_error($updateStmt);
-        $target_url = "traderProfile.php";
+        $target_url = "userProfile.php";
         echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
         exit;
     }

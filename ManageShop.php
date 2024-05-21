@@ -27,7 +27,7 @@
             <h1><?php echo($_SESSION['shopName']);?></h1>
             <h4><?php echo($_SESSION['shopDescription']);?></h4>
             <div class="buttons">
-                <button class="yellow-button"><a href="traderProfile.php">Account Info</a><span>&rarr;</span></button>
+                <button class="yellow-button"><a href="userProfile.php">Account Info</a><span>&rarr;</span></button>
                 <button class="yellow-button" id = "active">Manage shop<span>&rarr;</span></button>
                 <button class="yellow-button"><a href="changePass.php">Change password</a> <span>&rarr;</span></button>
             </div>

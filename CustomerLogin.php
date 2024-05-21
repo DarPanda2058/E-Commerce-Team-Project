@@ -28,6 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $_SESSION['id'] = $row['USER_ID'];
             $_SESSION['fname'] = $row['USER_FIRST_NAME'];
             $_SESSION['lname'] = $row['USER_LAST_NAME'];
+            $_SESSION['phone'] = $row['USER_PHONE'];
+            $_SESSION['address'] = $row['USER_ADDRESS'];    
+            $_SESSION['image'] = $row['USER_IMAGE'];
             $userID = $_SESSION['userID'];
             $userEmail = $_SESSION['email'];
             //creating cart for new customers
@@ -51,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
             
             echo '<script>alert("Logged in Successfully!")</script>';
-            $target_url = "CustomerOrders.php";
+            $target_url = "main.php";
             echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
             oci_free_statement($cart_id_stmt);
             oci_free_statement($cart_stmt);

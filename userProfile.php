@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trader Profile</title>
+    <title>Profile Page</title>
     <link rel="stylesheet" href="css/ManageShop.css">
 </head>
 <body>
@@ -28,7 +28,11 @@
             <h1><?php echo($_SESSION['fname']." ".$_SESSION['lname']);?></h1>
             <div class="buttons">
                 <button class="yellow-button" id = "active">Account Info<span>&rarr;</span></button>
+                <?php
+                    if($_SESSION['role'] == 'trader'){
+                ?>
                 <button class="yellow-button" ><a href="ManageShop.php">Manage Shop</a><span>&rarr;</span></button>
+                <?php }?>
                 <button class="yellow-button" ><a href="changePass.php">Change Password</a> <span>&rarr;</span></button>
             </div>
         </div>
@@ -40,9 +44,21 @@
         <h1>Manage Profile</h1>
         <div class="shop-info">
             <h2>Profile Info</h2>
-            <button class="yellow-button"><a href="ManageProduct.php">Access Your Dashboard</a></button>
+            <button class="yellow-button"><a href="<?php
+                if(($_SESSION['role'] == 'trader') || ($_SESSION['role']=='admin')){
+                    echo "#";
+                }else{
+                    echo "CustomerOrders.php";
+                }
+            ?>"><?php 
+                if(($_SESSION['role'] == 'trader') || ($_SESSION['role']=='admin')){
+                    echo "Access Your Dashboard";
+                }else{
+                    echo "My Orders";
+                }
+            ?></a></button>
         </div>
-        <form action="traderProfilePHP.php" method="post" enctype="multipart/form-data">
+        <form action="userProfilePHP.php" method="post" enctype="multipart/form-data">
             <div class="row">
             <div class="input-group">
                     <label for="fname">

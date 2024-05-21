@@ -5,11 +5,11 @@ session_start();
 if (isset($_POST['shopSave'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
-
     $tphone = $_POST['tphone'];
     $taddress = $_POST['taddress'];
     $timage = $_FILES['timage']['name'];
     $image_temp = $_FILES['timage']['tmp_name'];
+
 
     // Check if a new image is uploaded
     if (!empty($timage)) {
@@ -26,7 +26,7 @@ if (isset($_POST['shopSave'])) {
                       USER_PHONE = :tphone,
                       USER_ADDRESS = :taddress,
                       USER_IMAGE = :timage
-                      WHERE USER_ID = :trader_id";
+                      WHERE USER_ID = :user_id";
         } else {
             echo '<script>alert("ERROR: Data Not Updated. ' . oci_error($updatestmt) . '")</script>';
             exit;
@@ -43,7 +43,7 @@ if (isset($_POST['shopSave'])) {
                   USER_PHONE = :tphone,
                   USER_ADDRESS = :taddress,
                   USER_IMAGE = :timage
-                  WHERE USER_ID = :trader_id";
+                  WHERE USER_ID = :user_id";
     }
 
     // Prepare the statement
@@ -55,7 +55,7 @@ if (isset($_POST['shopSave'])) {
     oci_bind_by_name($updatestmt, ':tphone', $tphone);
     oci_bind_by_name($updatestmt, ':taddress', $taddress);
     oci_bind_by_name($updatestmt, ':timage', $timage);
-    oci_bind_by_name($updatestmt, ':trader_id', $_SESSION['userID']);
+    oci_bind_by_name($updatestmt, ':user_id', $_SESSION['userID']);
 
     // Execute the statement
     if (oci_execute($updatestmt)) {
@@ -67,12 +67,12 @@ if (isset($_POST['shopSave'])) {
         $_SESSION['address'] = $taddress;
         $_SESSION['image'] = $timage;
 
-        $target_url = "traderProfile.php";
+        $target_url = "userProfile.php";
         echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
         exit;
     } else {
         echo '<script>alert("ERROR: Data Not Updated. ' . oci_error($updatestmt) . '")</script>';
-        $target_url = "traderProfile.php";
+        $target_url = "userProfile.php";
         echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
         exit;
     }
