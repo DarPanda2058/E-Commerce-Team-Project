@@ -138,7 +138,7 @@
 <br><br>
 <hr class="line-below-button">
     <center>
-        <div class="about-us">
+        <div class="about-us" id="about-us">
             <h1>About Us</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nostrum cum provident. Est debitis voluptatibus ab natus? Deleniti eos velit delectus magnam nemo? Voluptate fugit magni est aliquam, perspiciatis dignissimos?</p>
         </div>
