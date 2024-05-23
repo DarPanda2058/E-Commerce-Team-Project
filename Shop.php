@@ -26,7 +26,7 @@
         $shop_row = oci_fetch_assoc($shop_stmt);
 
 
-        $product_query = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$shop_id'";
+        $product_query = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$shop_id' AND PRODUCT_STATUS = 1";
         $product_stmt = oci_parse($conn,$product_query);
         oci_execute($product_stmt);
         $noofproducts = 5;
@@ -54,14 +54,18 @@
                     <p class="descr"><?php echo $row['PRODUCT_DETAILS'] ?></p>
                     <div class="product-buttons">
                         <a href="ProductPage.php?id=<?php echo $row['PRODUCT_ID'] ;?>" class="btn buy">Buy</a>
-                        <a href="#" class="btn add-to-cart">Add to Cart</a>
+                        <a href="<?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'customer'){
+                                echo 'Cart.php?product_id='.$row['PRODUCT_ID'].'';
+                            }else{
+                                echo 'login_register.php';
+                            } ?>" class="btn add-to-cart">Add to Cart</a>
                     </div>
                 </div>
             </div>
             <?php $noofproducts--; } ?>
             
             <div class="allproduct">
-                <button class="custom-btn btn-16"><a href="AllProductShop.php?id=<?php echo $shop_id; ?>&name=<?php echo $shop_name; ?>">See More</a></button>
+                <button class="custom-btn btn-16"><a href="AllProduct.php?id=<?php echo $shop_id; ?>&name=<?php echo $shop_name; ?>">See More</a></button>
                 <hr class="line-below-button">
             </div>
         </div>
@@ -94,7 +98,7 @@
             <div class="l-container">
 
                 <?php 
-                    $product_query = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$shop_id' ORDER BY DBMS_RANDOM.VALUE";
+                    $product_query = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$shop_id' AND PRODUCT_STATUS = 1 ORDER BY DBMS_RANDOM.VALUE";
                     $product_stmt = oci_parse($conn,$product_query);
                     oci_execute($product_stmt);
                     $noofproducts = 6;
@@ -109,7 +113,11 @@
                         <p class="descr"><?php echo $row['PRODUCT_DETAILS'] ?></p>
                         <div class="product-buttons">
                             <a href="ProductPage.php?id=<?php echo $row['PRODUCT_ID'] ;?>" class="btn buy">Buy</a>
-                            <a href="#" class="btn add-to-cart">Add to Cart</a>
+                            <a href="<?php if(isset($_SESSION['role']) && ($_SESSION['role'] == 'customer')){
+                                echo 'Cart.php?product_id='.$row['PRODUCT_ID'].'';
+                            }else{
+                                echo 'login_register.php';
+                            } ?>" class="btn add-to-cart">Add to Cart</a>
                         </div>
                     </div>
                 </div>

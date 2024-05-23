@@ -35,6 +35,14 @@ table{
     padding-inline: 60px;
     margin-bottom: 40px;
 }
+table th,table td{
+    border-bottom: 1px dotted black;
+}
+
+table th{
+    font-size: 1.4rem;
+    padding-bottom: 20px !important ;
+}
 table tr td, table tr th{
     padding-block: 10px;
     padding-inline: 30px;
@@ -61,6 +69,17 @@ table .product-stock,.order-limit,.status{
 table .product-price{
     width: 100px;
     text-align: center;
+    font-weight: bold;
+}
+table .shop-name{
+    width: 150px;
+    text-align: center;
+    font-weight: bold;
+}
+table .phone, table .join-date{
+    text-align: center;
+}
+table .email{
     font-weight: bold;
 }
 table button{
@@ -96,5 +115,8 @@ table .order-delete-button:hover{
     background-color: red;
 }
 .approved{
+    background-color: green;
+}
+#green:hover{
     background-color: green;
 }

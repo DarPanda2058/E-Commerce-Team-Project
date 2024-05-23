@@ -3,38 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="css/nav.css">
 </head>
 <body>
     <?php
         include("connect.php");
-        session_start();
+        if(!isset($_SESSION)) 
+        { 
+            session_start(); 
+        } 
     ?>
-<header>
+
         <nav class="nav-bar">
             <ul class="menu">
                 <?php
-                    if(!isset($_SESSION['role']) || !($_SESSION['role'] == 'trader')){ 
+                    if(!isset($_SESSION['role']) || ($_SESSION['role'] == 'customer')){ 
                 ?>
                     <li class="drop-hover">
                         <div class="category">
                             <a href="#">Categories </a><i class="fa fa-angle-down" aria-hidden="true"></i>
                             <ul class="drop-content">
-                                <li><a href="#">Option 1</a></li>
-                                <li><a href="#">Option 2</a></li>
-                                <li><a href="#">Option 3</a></li>
-                                <li><a href="#">Option 4</a></li>
+                                <li><a href="#">Butchery Tools and Meat</a></li>
+                                <li><a href="#">Fruits and Vegetables</a></li>
+                                <li><a href="#">Seafood</a></li>
+                                <li><a href="#">Bread and Cakes</a></li>
+                                <li><a href="#">Exotic Food</a></li>
                             </ul>
                         </div>
                         <div class="search-box">
-                            <img src="images/search.png" width="30px" height="30px" alt="search button">
-                            <input type="text" placeholder="Search">
+                            <form class="nav-search" action="AllProduct.php" method="post">
+                            <button type="submit" name="searchData" ><img src="images/search.png" width="30px" height="30px" alt="search button"></button>
+                            <input type="text" name="search_content" placeholder="Search...." value="<?php
+                                if(isset($_SESSION['search_content'])){
+                                    echo $_SESSION['search_content'];
+                                }
+                            ?>">
+                            </form>
                         </div>
                     </li>
                 <?php } ?>
                 <li class="nav-logo" ><a href="<?php 
-                    if(isset($_SESSION['role']) && (($_SESSION['role'] == 'customer')||($_SESSION['role']=='admin'))){
+                    if(isset($_SESSION['role']) && (($_SESSION['role'] == 'customer'))){
                         echo "main.php";
                     }else if(!isset($_SESSION['role'])){
                         echo "main.php";
@@ -46,11 +58,11 @@
 
                     <span class="user-name">Welcome, <?php echo ($_SESSION['fname']." ".$_SESSION['lname']);?></span>
                     <?php
-                        if(isset($_SESSION['role']) && ($_SESSION['role'] == 'customer')){ 
+                        if((isset($_SESSION['role']) && ($_SESSION['role'] == 'customer')) || (!isset($_SESSION['role']))){ 
                     ?>
                         <div class="cart-container">
                             <img src="images/shopping-cart.png" width="25px" height="25px" alt="Cart">
-                            <span>Cart</span>
+                            <span><a href="Shopping-cart.php">Cart</a></span>
                             <span id="items_in_cart"><?php echo $_SESSION['cartQuantity'];?></span>
                         </div>
                     <?php } ?>
@@ -67,6 +79,14 @@
                         ?>
                         <a href="ManageShop.php">Manage Your Shop</a>
                         <?php } ?>
+                        <?php
+                            if($_SESSION['role'] == 'admin'){
+                        ?>
+                        <a href="ManageProductAdmin.php">Manage Products</a>
+                        <a href="ManageCustomer.php">Manage Customers</a>
+                        <a href="ManageTrader.php">Manage Traders</a>
+                        <?php } ?>
+
                         <a href="logout.php">Logout</a>
                     </div>
                 </div>   
@@ -76,15 +96,15 @@
                         <span class="user-name">Welcome, User</span>
                         <div class="cart-container">
                             <img src="images/shopping-cart.png" width="25px" height="25px" alt="Cart">
-                            <span>Cart</span>
-                            <span id="items_in_cart"><?php echo $_SESSION['cartQuantity'];?></span>
+                            <span><a href="login_register.php">Cart</a></span>
+                            <span id="items_in_cart">0</span>
                         </div>
                             <a href="login_register.php"><img src="images/user.png" height="40px" width="40px" alt="User Icon"></a>
                     <?php } ?>
                 </li>
             </ul>
         </nav>
-</header>
+
 <script>
     document.querySelector('.user-menu img').addEventListener('click', function() {
         const dropdown = document.querySelector('.user-dropdown');

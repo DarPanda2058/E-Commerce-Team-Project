@@ -44,7 +44,19 @@
         <h1>Change Password</h1>
         <div class="shop-info">
             <h2>Password Info</h2>
-            <button class="yellow-button"><a href="ManageProduct.php">Access Your Dashboard</a></button>
+            <button class="yellow-button"><a href="<?php
+                if(($_SESSION['role'] == 'trader') || ($_SESSION['role']=='admin')){
+                    echo "#";
+                }else{
+                    echo "CustomerOrders.php";
+                }
+            ?>"><?php 
+                if(($_SESSION['role'] == 'trader') || ($_SESSION['role']=='admin')){
+                    echo "Access Your Dashboard";
+                }else{
+                    echo "My Orders";
+                }
+            ?></a></button>
         </div>
         <form action="changePassPHP.php" method="post">
             <div class="section">

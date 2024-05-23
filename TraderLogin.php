@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
  
     // Prepared statement to prevent SQL injection
-    $query = "SELECT * FROM USERS WHERE USER_EMAIL = :email AND USER_TYPE = :role";
+    $query = "SELECT * FROM USERS WHERE USER_EMAIL = :email AND USER_TYPE = :role AND USER_STATE = 1";
     $stmt = oci_parse($conn, $query);
 
     oci_bind_by_name($stmt, ':email', $email);

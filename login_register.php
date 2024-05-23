@@ -13,7 +13,7 @@ include("register_php.php");
 </head>
 <body>
   <header>
-    <img src="images/logo.png" alt="logo" width="auto" height="auto">
+    <a href="main.php"><img src="images/logo.png" alt="logo" width="auto" height="auto"></a>
   </header>
 
   <div class="wrapper">

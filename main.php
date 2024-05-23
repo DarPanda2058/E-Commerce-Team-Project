@@ -12,8 +12,13 @@
 </head>
 <body>
     <header>
+        
         <?php 
+
             include('nav.php'); 
+            if(isset($_SESSION['search_content']) && !is_null($_SESSION['search_content'])){
+                $_SESSION['search_content'] = null;
+            }
             include('connect.php');
         ?>
     </header>
@@ -27,7 +32,7 @@
         <div class="l-container">
 
             <?php 
-                $product_query = "SELECT * FROM PRODUCT";
+                $product_query = "SELECT * FROM PRODUCT WHERE PRODUCT_STATUS = 1";
                 $product_stmt = oci_parse($conn,$product_query);
                 oci_execute($product_stmt);
                 $noofproducts = 10;
@@ -42,7 +47,11 @@
                     <p class="descr"><?php echo $row['PRODUCT_DETAILS'] ?></p>
                     <div class="product-buttons">
                         <a href="ProductPage.php?id=<?php echo $row['PRODUCT_ID'] ;?>" class="btn buy">Buy</a>
-                        <a href="#" class="btn add-to-cart">Add to Cart</a>
+                        <a href="<?php if(isset($_SESSION['role']) && ($_SESSION['role'] == 'customer')){
+                               echo 'Cart.php?product_id='.$row['PRODUCT_ID'].'';
+                            }else{
+                                echo 'login_register.php';
+                            } ?>" class="btn add-to-cart">Add to Cart</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +105,7 @@
             <div class="l-container">
 
                 <?php 
-                    $product_query = "SELECT * FROM PRODUCT ORDER BY DBMS_RANDOM.VALUE";
+                    $product_query = "SELECT * FROM PRODUCT WHERE PRODUCT_STATUS = 1 ORDER BY DBMS_RANDOM.VALUE";
                     $product_stmt = oci_parse($conn,$product_query);
                     oci_execute($product_stmt);
                     $noofproducts = 6;
@@ -111,7 +120,11 @@
                         <p class="descr"><?php echo $row['PRODUCT_DETAILS'] ?></p>
                         <div class="product-buttons">
                             <a href="ProductPage.php?id=<?php echo $row['PRODUCT_ID'] ;?>" class="btn buy">Buy</a>
-                            <a href="#" class="btn add-to-cart">Add to Cart</a>
+                            <a href="<?php if(isset($_SESSION['role']) && ($_SESSION['role'] == 'customer')){
+                                echo 'Cart.php?product_id='.$row['PRODUCT_ID'].'';
+                            }else{
+                                echo 'login_register.php';
+                            } ?>" class="btn add-to-cart">Add to Cart</a>
                         </div>
                     </div>
                 </div>

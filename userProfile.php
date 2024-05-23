@@ -33,6 +33,11 @@
                 ?>
                 <button class="yellow-button" ><a href="ManageShop.php">Manage Shop</a><span>&rarr;</span></button>
                 <?php }?>
+                <?php if($_SESSION['role'] == 'admin'){ ?>
+                    <button class="yellow-button" ><a href="ManageCustomer.php">Manage Customers</a><span>&rarr;</span></button>
+                    <button class="yellow-button" ><a href="ManageTrader.php">Manage Traders</a><span>&rarr;</span></button>
+                    <button class="yellow-button" ><a href="ManageProductAdmin.php">Manage Products</a><span>&rarr;</span></button>
+                <?php } ?>
                 <button class="yellow-button" ><a href="changePass.php">Change Password</a> <span>&rarr;</span></button>
             </div>
         </div>

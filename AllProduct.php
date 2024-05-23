@@ -11,49 +11,107 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-       <?php include('nav.php');?>
-       <?php include('connect.php');?>
-       <?php
-            if(isset($_GET['id'])){
-                $shop_id = $_GET['id'];
-                $shop_name = $_GET['name'];
-                $query = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$shop_id'";
-            }else{
-                $query = "SELECT * FROM PRODUCT";
-            }
-            $stmt = oci_parse($conn,$query);
-            oci_execute($stmt);
-       ?>
+       
+<?php 
+include('connect.php');
+session_start();
 
 
-    <center>
-        <?php if(isset($_GET['id'])){ ?>
-        <h1 class="title">Butcher</h1>
-        <?php } ?>
-        <h1>Products</h1>
-        <hr width="5%">
-    </center>
+function applySortOrder($query, $sort_order) {
+    if ($sort_order == "asc") {
+        return $query . " ORDER BY PRODUCT_PRICE ASC";
+    } else if ($sort_order == "desc") {
+        return $query . " ORDER BY PRODUCT_PRICE DESC";
+    } else {
+        return $query;
+    }
+}
 
-    <div class="headline">
-        <div class="l-container">
-            <?php 
-                while($row = oci_fetch_assoc($stmt)){
-            ?>
-            <div class="product">
-                <div class="product-image" style="background-image: url(images/<?php echo $row['PRODUCT_IMAGE'] ?>);"></div>
-                <div class="product-info">
-                    <h2><?php echo $row['PRODUCT_NAME'] ?></h2>
-                    <p class="price">&pound;<?php echo $row['PRODUCT_PRICE'] ?></p>
-                    <p class="descr"><?php echo $row['PRODUCT_DETAILS'] ?></p>
-                    <div class="product-buttons">
-                        <a href="#" class="btn buy">Buy</a>
-                        <a href="#" class="btn add-to-cart">Add to Cart</a>
-                    </div>
+
+$sort_order = isset($_POST['sort_order']) ? $_POST['sort_order'] : 'asc';
+$_SESSION['sort_order'] = $sort_order;
+
+
+if (isset($_GET['id'])) {
+    $shop_id = $_GET['id'];
+    $shop_name = $_GET['name'];
+    $_SESSION['ALL_SHOP_ID'] = $shop_id;
+    $_SESSION['ALL_SHOP_NAME'] = $shop_name;
+} else {
+    $shop_id = isset($_SESSION['ALL_SHOP_ID']) ? $_SESSION['ALL_SHOP_ID'] : null;
+    $shop_name = isset($_SESSION['ALL_SHOP_NAME']) ? $_SESSION['ALL_SHOP_NAME'] : null;
+}
+
+
+$search_content = isset($_POST['search_content']) ? $_POST['search_content'] : (isset($_SESSION['search_content']) ? $_SESSION['search_content'] : null);
+$_SESSION['search_content'] = $search_content;
+
+
+$query = "SELECT * FROM PRODUCT WHERE PRODUCT_STATUS = 1";
+if ($shop_id) {
+    $query .= " AND SHOP_ID = '$shop_id'";
+}
+if ($search_content) {
+    $query .=" AND UPPER(PRODUCT_NAME) LIKE UPPER('%$search_content%')";
+}
+$query = applySortOrder($query, $sort_order);
+
+
+$stmt = oci_parse($conn, $query);
+oci_execute($stmt);
+
+
+$_SESSION['ALL_SHOP_ID'] = null;
+
+// Include navigation
+include('nav.php');
+?>
+
+<center>
+    <?php if(isset($_GET['id']) || isset($_SESSION['ALL_SHOP_ID']) ){ ?>
+    <h1 class="title"><?php echo $shop_name; ?></h1>
+    <?php } ?>
+    <h1>Products</h1>
+    <hr width="5%">
+</center>
+<?php
+    if(isset($_SESSION['search_content'])){
+        echo "<section>Search Results For : ".$_SESSION['search_content'];
+        // Add the radio buttons and filter button
+        echo '<form method="post" action="AllProduct.php" style="display: inline-block; margin-left: 20px;">';
+        echo '<input type="radio" id="asc" name="sort_order" value="asc"';
+        if(((isset($sort_order)) && ($sort_order == "asc")) || !isset($sort_order)) echo ' checked';
+        echo '><label for="asc">Ascending</label>';
+        echo '<input type="radio" id="desc" name="sort_order" value="desc" style="margin-left: 10px;"';
+        if(isset($sort_order) && $sort_order == "desc") echo ' checked';
+        echo '><label for="desc">Descending</label>';
+        echo '<button type="submit" class="btn btn-primary" style="margin-left: 10px;">';
+        echo '<i class="fas fa-filter"></i> Filter';
+        echo '</button>';
+        echo '</form>';
+        echo '</section>';
+    }
+?>
+<div class="headline">
+    <div class="l-container">
+        <?php 
+            while($row = oci_fetch_assoc($stmt)){
+        ?>
+        <div class="product">
+            <div class="product-image" style="background-image: url(images/<?php echo $row['PRODUCT_IMAGE'] ?>);"></div>
+            <div class="product-info">
+                <h2><?php echo $row['PRODUCT_NAME'] ?></h2>
+                <p class="price">&pound;<?php echo $row['PRODUCT_PRICE'] ?></p>
+                <p class="descr"><?php echo $row['PRODUCT_DETAILS'] ?></p>
+                <div class="product-buttons">
+                    <a href="#" class="btn buy">Buy</a>
+                    <a href="#" class="btn add-to-cart">Add to Cart</a>
                 </div>
             </div>
-            <?php } ?>  
         </div>
+        <?php } ?>  
     </div>
+</div>
 <?php include('footer.html');?>
 </body>
 </html>

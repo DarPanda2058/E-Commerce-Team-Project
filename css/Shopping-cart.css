@@ -104,6 +104,10 @@ table td{
     box-shadow: 1px 1px 4px black;
     margin-bottom: 5px;
 }
+.remove-cartitem button a{
+    text-decoration: none;
+    color: black;
+}
 .right-align-total{
     align-content: right;
 }
@@ -115,6 +119,7 @@ table td{
     text-align: right;
     display: flex;
     flex-direction: column;
+    margin-bottom: 50px;
 }
 .sub-total,.shipping,.total{
     display: flex;

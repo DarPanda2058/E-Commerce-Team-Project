@@ -36,17 +36,21 @@
             <hr>
             <p class="description"><?php echo $product_row['PRODUCT_DETAILS'] ; ?></p>
             <div class="quantity-price">
-                <div class="quantity">
-                    <button>&nbsp;+</button>
-                    <span>1</span>
-                    <button>-&nbsp;</button>
-                </div>
+            <div class="quantity">
+                <button class="quantity-plus">&nbsp;+</button>
+                <span class="quantity-value">1</span>
+                <button class="quantity-minus">-&nbsp;</button>
+            </div>
                 <p class="stock-status">In Stock</p>
                 <p class="price">&pound;<?php echo $product_row['PRODUCT_PRICE'] ; ?></p>
             </div>
             <div class="buy-cart-buttons">
                 <a href=""><button>BUY NOW</button></a>
-                <a href=""><button>ADD TO CART</button></a>
+                <a href="<?php if(!isset($_SESSION['id'])){
+                                echo 'login_register.php';
+                            }else{
+                                echo '#';
+                            } ?>"><button>ADD TO CART</button></a>
             </div>
         </div>
     </div>
@@ -172,6 +176,23 @@
                 // settings: "unslick"
                 // instead of a settings object
             ]
+        });
+
+
+        $(document).ready(function() {
+        $('.quantity-plus').click(function() {
+            var quantity = parseInt($('.quantity-value').text());
+            quantity++;
+            $('.quantity-value').text(quantity);
+        });
+
+        $('.quantity-minus').click(function() {
+            var quantity = parseInt($('.quantity-value').text());
+            if (quantity > 1) {
+                quantity--;
+                $('.quantity-value').text(quantity);
+            }
+        });
         });
     </script>
 </body>
