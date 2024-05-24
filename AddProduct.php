@@ -40,7 +40,7 @@
                     <label for="category">
                         <h2>Category:</h2>
                     </label>
-                    <input type="text" name="pcategory" id="category" placeholder="Enter category" class="styled-input">
+                    <input type="text" name="pcategory" id="category" placeholder="Enter category" class="styled-input" value="<?php echo $_SESSION['shopCategory']; ?>" readonly >
 
                 </div>
                 <div class="input-group">

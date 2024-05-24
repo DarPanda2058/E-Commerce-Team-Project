@@ -18,7 +18,7 @@ if (isset($_POST['registerBtn'])) {
     $age = $_POST['age'];
     $gender = $_POST['gender'];
     $role = $_POST['role'];
-    $status = "1";
+    $status = "0";
     $time = date("d-M-y h:i:s");
     $image = "default-image.png";
 
@@ -113,9 +113,8 @@ if (isset($_POST['registerBtn'])) {
                 oci_bind_by_name($update_user_cart_stmt, ':user_id', $user_id);
                 oci_execute($update_user_cart_stmt);             
             }
-                $_SESSION = array();
-                session_destroy();
-            $target_url = "login_register.php";
+                
+            $target_url = "OTP.php";
             echo '<script>alert("Registered Successfully")</script>';
             echo '<meta http-equiv="refresh" content="0;url=' . $target_url . '">';
         } else {

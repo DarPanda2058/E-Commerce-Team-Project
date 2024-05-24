@@ -26,11 +26,11 @@
                         <div class="category">
                             <a href="#">Categories </a><i class="fa fa-angle-down" aria-hidden="true"></i>
                             <ul class="drop-content">
-                                <li><a href="#">Butchery Tools and Meat</a></li>
-                                <li><a href="#">Fruits and Vegetables</a></li>
-                                <li><a href="#">Seafood</a></li>
-                                <li><a href="#">Bread and Cakes</a></li>
-                                <li><a href="#">Exotic Food</a></li>
+                                <li><a href="AllProduct.php?category=Butchery Tools and Meat">Butchery Tools and Meat</a></li>
+                                <li><a href="AllProduct.php?category=Fruits and Vegetables">Fruits and Vegetables</a></li>
+                                <li><a href="AllProduct.php?category=Seafood">Seafood</a></li>
+                                <li><a href="AllProduct.php?category=Bread and Cakes">Bread and Cakes</a></li>
+                                <li><a href="AllProduct.php?category=Exotic Food">Exotic Food</a></li>
                             </ul>
                         </div>
                         <div class="search-box">

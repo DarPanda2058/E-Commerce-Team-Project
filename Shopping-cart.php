@@ -83,10 +83,13 @@
         </div>
         <div class="total">
             <p>TOTAL</p>
-            <p>&pound; <span id="total"><?php echo number_format($total_price, 2); ?></span></p>
+            <p>&pound; <span id="total">
+                <?php echo number_format($total_price, 2); 
+                    $_SESSION['totalPrice'] = number_format($total_price, 2);            
+                ?></span></p>
         </div>
-        <button><a href="CollectionPoint.html">Continue</a></button>
-        <button>Cancel</button>
+        <button><a href="CollectionPoint.php">Continue</a></button>
+        <button><a href="main.php">Cancel</a></button>
     </div>
     <script>
         document.querySelectorAll('.quantity-btn').forEach(button => {
@@ -106,10 +109,20 @@
                 
                 if (action === 'increase' && quantity < maxLimit) {
                     quantity++;
-                    
                 } else if (action === 'decrease' && quantity > 1) {
                     quantity--;
                 }
+
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "updateCartQuantity.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log(xhr.responseText); // Output response for debugging
+                    }
+                };
+                xhr.send(`product_id=${productId}&quantity=${quantity}`);
+
 
                 quantityElement.textContent = ` ${quantity} `;
                 const newTotal = productPrice * quantity;
@@ -117,22 +130,13 @@
                 
                 // Update subtotal and total
                 subtotal = Array.from(document.querySelectorAll('.cart-total-price'))
-                    .map(elem => parseFloat(elem.textContent.replace('£', '').trim()))
-                    .reduce((acc, curr) => acc + curr, 0);
+                .map(elem => parseFloat(elem.textContent.replace('£', '').trim()))
+                .reduce((acc, curr) => acc + curr, 0);
                 
                 subtotalElement.textContent = subtotal.toFixed(2);
                 totalElementOverall.textContent = subtotal.toFixed(2);
+                
 
-                // Optionally, send an AJAX request to update the quantity in the database
-                // Example:
-                // fetch(`update_cart.php?product_id=${productId}&quantity=${quantity}`)
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         // handle success
-                //     })
-                //     .catch(error => {
-                //         console.error('Error:', error);
-                //     });
             });
         });
     </script>

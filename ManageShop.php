@@ -69,7 +69,7 @@
                 
                 <div class="section">
                     <label for="category"><h2>Category</h2></label>
-                    <input type="text" name="scategory" id="category" placeholder="Enter Category" class="styled-input" value="<?php echo($_SESSION['shopCategory']);?>">       
+                    <input type="text" name="scategory" id="category" placeholder="Enter Category" class="styled-input" value="<?php echo($_SESSION['shopCategory']);?>" readonly>       
                     <div class="right-btn"><button type="submit" class="save-button" name="shopSave" >Save</button></div>   
                 </div>
         </form>

@@ -136,14 +136,19 @@
 
 <hr> 
 <br><br>
-<hr class="line-below-button">
-    <center>
-        <div class="about-us" id="about-us">
-            <h1>About Us</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nostrum cum provident. Est debitis voluptatibus ab natus? Deleniti eos velit delectus magnam nemo? Voluptate fugit magni est aliquam, perspiciatis dignissimos?</p>
+    <section class="about-butcher" id="about-us">
+        <div class="about-container">
+            <div class="b-game-card-rect">
+                <div class="b-game-card__cover-rect" style="background-image: url(images/logo.png);"></div>
+            </div>
+            <div class="about-text">
+                <h2>About Us</h2>
+                <p></p>
+                <p></p>
+            </div>
         </div>
-        <hr class="line-below-button">
-    </center>
+    </section>
+    <hr>
 
 
     <?php include('footer.html'); ?>

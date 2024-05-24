@@ -1378,6 +1378,7 @@ hr {
 .about-butcher {
     padding: 40px 0;
     text-align: center;
+    max-width: none;
 }
 
 .about-container {

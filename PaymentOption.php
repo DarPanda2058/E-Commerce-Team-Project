@@ -8,10 +8,17 @@
     <link rel="stylesheet" href="css/PaymentOption.css">
 </head>
 <body>
-    <header>
-        <img class="logo" src="images/logo.png" height="auto" width="70px" alt="">
-        <img class="acc" src="images/user.png" height="auto" width="45px" alt="">
-    </header>
+    <?php 
+        include('connect.php'); 
+        include('nav.php'); 
+        $paypalURL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+        $paypalID = 'huddlehub@business.example.com'; //Business Email
+
+        if(isset($_GET['error'])){
+            echo '<script>alert("Payment Not Processed!");</script>';
+        }
+
+    ?>
     <div class="title-row">
         <div class="title-shopping">
             <p>1. Shopping Cart </p>
@@ -43,7 +50,7 @@
         <div class="total-container">
             <div class="sub-total">
                 <p>Sub-total</p>
-                <p>&pound; 200</p>
+                <p>&pound; <?php echo $_SESSION['totalPrice'] ?></p>
             </div>
             <div class="shipping">
                 <p>Shipping</p>
@@ -51,10 +58,25 @@
             </div>
             <div class="total">
                 <p>TOTAL</p>
-                <p>&pound; 200</p>
+                <p>&pound; <?php echo $_SESSION['totalPrice'] ?></p>
             </div>
-            <button>Continue</button>
-            <button>Cancel</button>
+            <form action="<?php echo $paypalURL; ?>" >
+            <input type="hidden" name="business" value="<?php echo $paypalID;?>">
+
+            <!-- Specify a Buy Now button. -->
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="item_name" value="Huddle Hub Products">
+            <input type="hidden" name="item_number" value="<?php echo $_SESSION['cartQuantity']; ?>">
+            <input type="hidden" name="amount" value="<?php echo $_SESSION['totalPrice'];?>">
+            <input type="hidden" name="currency_code" value="GBP">
+            <!-- <input type="hidden" name="quantity" value="2"> -->
+
+            <!-- Specify URLs -->
+            <input type='hidden' name='cancel_return' value='http://localhost/E-commerce-team-project/PaymentOption.php?error=1'>
+            <input type='hidden' name='return' value='http://localhost/E-commerce-team-project/AddtoOrder.php'>
+            <button type="submit" name="submit">Continue</button>
+            </form>
+            <button><a href="main.php">Cancel</a></button>
         </div>
 </body>
 </html>

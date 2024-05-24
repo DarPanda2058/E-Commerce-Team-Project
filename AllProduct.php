@@ -11,11 +11,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-       
+
 <?php 
 include('connect.php');
 session_start();
-
 
 function applySortOrder($query, $sort_order) {
     if ($sort_order == "asc") {
@@ -27,10 +26,8 @@ function applySortOrder($query, $sort_order) {
     }
 }
 
-
 $sort_order = isset($_POST['sort_order']) ? $_POST['sort_order'] : 'asc';
 $_SESSION['sort_order'] = $sort_order;
-
 
 if (isset($_GET['id'])) {
     $shop_id = $_GET['id'];
@@ -42,24 +39,25 @@ if (isset($_GET['id'])) {
     $shop_name = isset($_SESSION['ALL_SHOP_NAME']) ? $_SESSION['ALL_SHOP_NAME'] : null;
 }
 
-
 $search_content = isset($_POST['search_content']) ? $_POST['search_content'] : (isset($_SESSION['search_content']) ? $_SESSION['search_content'] : null);
 $_SESSION['search_content'] = $search_content;
 
+$category = isset($_GET['category']) ? $_GET['category'] : null;
 
 $query = "SELECT * FROM PRODUCT WHERE PRODUCT_STATUS = 1";
 if ($shop_id) {
     $query .= " AND SHOP_ID = '$shop_id'";
 }
 if ($search_content) {
-    $query .=" AND UPPER(PRODUCT_NAME) LIKE UPPER('%$search_content%')";
+    $query .= " AND UPPER(PRODUCT_NAME) LIKE UPPER('%$search_content%')";
+}
+if ($category) {
+    $query .= " AND UPPER(PRODUCT_CATEGORY) = UPPER('$category')";
 }
 $query = applySortOrder($query, $sort_order);
 
-
 $stmt = oci_parse($conn, $query);
 oci_execute($stmt);
-
 
 $_SESSION['ALL_SHOP_ID'] = null;
 

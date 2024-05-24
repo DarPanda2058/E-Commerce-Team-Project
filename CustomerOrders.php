@@ -40,11 +40,12 @@
             $product_id_stmt = oci_parse($conn, $query_product_id);
             $product_data_stmt = oci_parse($conn, $query_product_data);
             
-            $user_id = 12;
+            $user_id = $_SESSION['userID'];
             oci_bind_by_name($order_id_stmt,':user_id',$user_id);
             
 
             oci_execute($order_id_stmt);
+
 
             // Fetch the order_id
             while (($row = oci_fetch_array($order_id_stmt))) {

@@ -14,27 +14,6 @@ if(isset($_POST['submit'])){
     $pimage = $_FILES['pimage']['name'];
     $image_temp = $_FILES['pimage']['tmp_name']; // Temporary file path
 
-    //session-part
-
-    // $trader_id = $_SESSION['user_id'];
-
-    // // Query to get the shop_id
-    // $shop_id_query = "SELECT shop_id FROM shop WHERE trader_id = :trader_id";
-
-    // // Prepare the statement
-    // $shop_id_stmt = oci_parse($conn, $shop_id_query);
-
-    // // Bind the trader_id parameter
-    // oci_bind_by_name($shop_id_stmt, ':trader_id', $trader_id);
-
-    // // Execute the statement
-    // oci_execute($shop_id_stmt);
-
-    // // Fetch the result
-    // $shop_id = null;
-    // if ($row = oci_fetch_assoc($shop_id_stmt)) {
-    //     $shop_id = $row['SHOP_ID'];
-    // }
 
     $destination = "images/" . $pimage; 
     $shop_id = $_SESSION['shopID'];
