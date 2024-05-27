@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="css/CollectionPoint.css">
 </head>
 <body>
-    <?php 
+    <?php
     include('connect.php'); 
     include('nav.php'); 
     
     ?>
+
     <div class="title-row">
         <div class="title-shopping">
             <p>1. Shopping Cart </p>

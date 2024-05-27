@@ -11,6 +11,7 @@ if(isset($_POST['submit'])){
     $pprice = $_POST['pprice'];
     $pcategory = $_POST['pcategory'];
     $porderlim = $_POST['porderlim'];
+    $pallergy = $_POST['pallergy'];
     $pimage = $_FILES['pimage']['name'];
     $image_temp = $_FILES['pimage']['tmp_name']; // Temporary file path
 
@@ -18,7 +19,8 @@ if(isset($_POST['submit'])){
     $destination = "images/" . $pimage; 
     $shop_id = $_SESSION['shopID'];
     if (move_uploaded_file($image_temp, $destination)){
-        $query = "INSERT INTO PRODUCT(PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_CATEGORY,PRODUCT_MAX_LIMIT,PRODUCT_DETAILS,PRODUCT_QUANTITY,PRODUCT_STATUS,SHOP_ID) VALUES('$pname','$pprice','$pimage','$pcategory','$porderlim','$pdesc','$pstock',0,'$shop_id')";
+        $product_time = date('y-M-d');
+        $query = "INSERT INTO PRODUCT(PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_CATEGORY,PRODUCT_MAX_LIMIT,PRODUCT_DETAILS,PRODUCT_QUANTITY,PRODUCT_STATUS,SHOP_ID,PRODUCT_CREATED_TIME,ALLERGY_INFORMATION) VALUES('$pname','$pprice','$pimage','$pcategory','$porderlim','$pdesc','$pstock',0,'$shop_id','$product_time','$pallergy')";
         $insertstmt = oci_parse($conn,$query);
         if(oci_execute($insertstmt)){
             echo'<script>alert("Data Inserted Successfully!")</script>';

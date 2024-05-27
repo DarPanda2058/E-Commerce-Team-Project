@@ -127,7 +127,7 @@ header{
 .cart-container {
     display: flex;
     align-items: center;
-    background-color: #f1f1f1;
+    /* background-color: #f1f1f1; */
     border-radius: 4px;
     padding: 5px 10px;
     margin-right: 20px;
@@ -206,4 +206,6 @@ a{
 a:hover{
     text-decoration: none;
 }
+
+
 

@@ -2,19 +2,22 @@
 .order-header{
     margin: auto;
     padding-left: 100px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     height: 150px;
     justify-content: space-evenly;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
 }
 table{
     margin-inline: auto;
     padding-inline: 60px;
+    margin-bottom: 50px;
 }
 table tr td, table tr th{
-    padding-block: 10px;
-    padding-inline: 15px;
+    padding-block: 15px;
+    padding-inline: 30px;
+    border-bottom: 1px dotted black;
 }
 table .title{
     text-align: center;
@@ -48,4 +51,7 @@ table button:hover{
     background-color: lightgreen;
     box-shadow: 1px 1px 4px black;;
     margin-bottom: 2px;
+}
+.wishlist tr, .wishlist td, .wishlist th{
+    padding-inline: 90px;
 }

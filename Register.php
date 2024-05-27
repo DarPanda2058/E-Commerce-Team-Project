@@ -76,7 +76,7 @@ if (isset($_POST['registerBtn'])) {
         $register_stmnt = oci_parse($conn, $query);
         
         //passwordSecurity
-        // $password = password_hash($password, PASSWORD_BCRYPT);
+        $password = md5($password);
         oci_bind_by_name($register_stmnt, ':fname', $fname);
         oci_bind_by_name($register_stmnt, ':lname', $lname);
         oci_bind_by_name($register_stmnt, ':phone', $phone);
@@ -105,13 +105,25 @@ if (isset($_POST['registerBtn'])) {
                 $cart_stmt = oci_parse($conn, $cart_query);
                 oci_bind_by_name($cart_stmt, ':cart_id', $cart_id, -1, OCI_B_INT); // Bind cart_id to receive the new CART_ID
                 oci_execute($cart_stmt);
+
+                //Insert a new wishlist with an initail quantity of 0
+                $wishlist_query = "INSERT INTO WISHLIST (WISHLIST_QUANTITY) VALUES (0) RETURNING WISHLIST_ID INTO :wishlist_id";
+                $wishlist_stmt = oci_parse($conn, $wishlist_query);
+                oci_bind_by_name($wishlist_stmt, ':wishlist_id', $wishlist_id, -1, OCI_B_INT); // Bind cart_id to receive the new CART_ID
+                oci_execute($wishlist_stmt);
             
                 // Update the USERS table with the new CART_ID for the specific USER_ID
                 $update_user_cart_query = "UPDATE USERS SET CART_ID = :cart_id WHERE USER_ID = :user_id";
                 $update_user_cart_stmt = oci_parse($conn, $update_user_cart_query);
                 oci_bind_by_name($update_user_cart_stmt, ':cart_id', $cart_id); // Use the bound cart_id
                 oci_bind_by_name($update_user_cart_stmt, ':user_id', $user_id);
-                oci_execute($update_user_cart_stmt);             
+                oci_execute($update_user_cart_stmt);   
+                //Update the USERS table with the new WISHLIST_ID for the specific USER_ID
+                $update_user_wishlist_query = "UPDATE USERS SET WISHLIST_ID = :wishlist_id WHERE USER_ID = :user_id";
+                $update_user_wishlist_stmt = oci_parse($conn, $update_user_wishlist_query);
+                oci_bind_by_name($update_user_wishlist_stmt, ':wishlist_id', $wishlist_id); // Use the bound cart_id
+                oci_bind_by_name($update_user_wishlist_stmt, ':user_id', $user_id);
+                oci_execute($update_user_wishlist_stmt);            
             }
                 
             $target_url = "OTP.php";

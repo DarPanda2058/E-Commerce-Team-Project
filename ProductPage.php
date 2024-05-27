@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         <title>Product</title>
     </head>
 <body>
@@ -17,11 +18,43 @@
         include("nav.php");
         include('connect.php');
 
+        function printStars($rating) {
+            $stars = '';
+            for ($i = 1; $i <= 5; $i++) {
+                if ($i <= $rating) {
+                    $stars .= '<span class="star">&#9733;</span>'; // Full star
+                } else {
+                    $stars .= '<span class="star">&#9734;</span>'; // Empty star
+                }
+            }
+            echo $stars;
+        }
+
+
         $product_id = $_GET['id'];
         $product_query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$product_id'";
         $product_stmt = oci_parse($conn,$product_query);
         oci_execute($product_stmt);
         $product_row = oci_fetch_assoc($product_stmt);
+        $shop_id = $product_row['SHOP_ID'];
+        $max_limit = $product_row['PRODUCT_MAX_LIMIT'];
+        $quantity = $product_row['PRODUCT_QUANTITY'];
+
+        $reviewselectquery = "SELECT 
+                                COUNT(*) AS TOTAL, 
+                                ROUND(AVG(REVIEW_RATING)) AS RATING
+                                FROM 
+                                    REVIEW
+                                WHERE 
+                                    product_id = '$product_id'";
+        $reviewselectstmt = oci_parse($conn,$reviewselectquery);
+        oci_execute($reviewselectstmt);
+
+        $totalreviewrow=oci_fetch_assoc($reviewselectstmt);
+        $totalreviews = $totalreviewrow['TOTAL'];
+        $avgrating = $totalreviewrow['RATING'];
+
+
     ?>
     <div class="product-container">
         <div class="product-image">
@@ -29,108 +62,103 @@
         </div>
         <div class="product-details">
             <h2><?php echo $product_row['PRODUCT_NAME'] ; ?></h2>
-            <div class="star-rating">
-                <p class="small-font">Star-Review</p>
-                <p class="small-font">5 Reviews</p>
+            <div class="star-rating" style="align-items:center">
+                <p class="small-font"><?php printStars($avgrating) ?></p>
+                <p class="small-font"><?php echo $totalreviews ?> Reviews</p>
+                <a href='wishlistadd.php?product_id=<?php echo $product_id; ?>' class="wishlist-btn">❤</a>
             </div>
             <hr>
             <p class="description"><?php echo $product_row['PRODUCT_DETAILS'] ; ?></p>
             <div class="quantity-price">
-            <div class="quantity">
-                <button class="quantity-plus">&nbsp;+</button>
-                <span class="quantity-value">1</span>
-                <button class="quantity-minus">-&nbsp;</button>
-            </div>
-                <p class="stock-status">In Stock</p>
-                <p class="price">&pound;<?php echo $product_row['PRODUCT_PRICE'] ; ?></p>
+                <div class="quantity">
+                    <button class="quantity-plus">&nbsp;+</button>
+                    <span class="quantity-value" id="quantity-value">1</span>
+                    <button class="quantity-minus">-&nbsp;</button>
+                </div>
+                <p class="stock-status" id="<?php 
+                    $product_quantity = $product_row['PRODUCT_QUANTITY'];
+                if($product_quantity > 0){
+                    echo "green";
+                }else{
+                    echo "red";
+                } ?>"><?php if($product_row['PRODUCT_QUANTITY']>0){
+                    echo "In Stock";
+                }else{
+                    echo "Out Of Stock";
+                } ?></p>
+                <p class="price">&pound;<?php echo $product_row['PRODUCT_PRICE']; ?></p>
             </div>
             <div class="buy-cart-buttons">
-                <a href=""><button>BUY NOW</button></a>
-                <a href="<?php if(!isset($_SESSION['id'])){
-                                echo 'login_register.php';
-                            }else{
-                                echo '#';
-                            } ?>"><button>ADD TO CART</button></a>
+                <a id="buy-now-link" href="<?php if(!isset($_SESSION['id'])){
+                    echo 'login_register.php';
+                }else{
+                    echo 'Cart.php?product_id='.$product_id.'&buynow=1'.'&product_quantity=1';
+                } ?>"><button id="buy-now-button" >BUY NOW</button></a>
+                <a id="add-to-cart-link" href="<?php if(!isset($_SESSION['id'])){
+                    echo 'login_register.php';
+                }else{
+                    echo 'Cart.php?product_id='.$product_id.'&product_quantity=1';
+                } ?>"><button id="add-to-cart-button">ADD TO CART</button></a>
             </div>
         </div>
     </div>
-    <h2 class="sub-section">More By Shop</h2>
-    <center>
-    <div class="recommendation-container">
-            <div class="recommend-product">
-                <img src="images/product-recommendation.jpg" alt="">
-                <p class="small-font">Product Name</p>
-                <p class="small-font">Price</p>
+    <h2 class="sub-section" style="margin-bottom: 50px;" >More By Shop</h2>
+    <div class="l-container">
+        <?php 
+            $recommendquery = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$shop_id' ";
+            $recommendstmt = oci_parse($conn,$recommendquery);
+            oci_execute($recommendstmt);
+            $iter = 5;
+            while(($row = oci_fetch_assoc($recommendstmt)) && $iter>0){
+        ?>
+            <div class="product">
+                <div class="product-image" style="background-image: url(images/<?php echo $row['PRODUCT_IMAGE'] ?>);"></div>
+                <div class="product-info">
+                    <h2><?php echo $row['PRODUCT_NAME'] ?></h2>
+                    <p class="price">&pound;<?php echo $row['PRODUCT_PRICE'] ?></p>
+                    <p class="descr"><?php echo $row['PRODUCT_DETAILS'] ?></p>
+                    <div class="product-buttons">
+                        <a href="ProductPage.php?id=<?php echo $row['PRODUCT_ID'] ;?>" class="btn buy">Buy</a>
+                        <a href="<?php if(isset($_SESSION['role']) && ($_SESSION['role'] == 'customer')){
+                               echo 'Cart.php?product_id='.$row['PRODUCT_ID'].'';
+                            }else{
+                                echo 'login_register.php';
+                            } ?>" class="btn add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
             </div>
-            <div class="recommend-product">
-                <img src="images/product-recommendation.jpg" alt="">
-                <p class="small-font">Product Name</p>
-                <p class="small-font">Price</p>
-            </div>
-            <div class="recommend-product">
-                <img src="images/product-recommendation.jpg" alt="">
-                <p class="small-font">Product Name</p>
-                <p class="small-font">Price</p>
-            </div>
-            <div class="recommend-product">
-                <img src="images/product-recommendation.jpg" alt="">
-                <p class="small-font">Product Name</p>
-                <p class="small-font">Price</p>
-            </div>
-            <div class="recommend-product">
-                <img src="images/product-recommendation.jpg" alt="">
-                <p class="small-font">Product Name</p>
-                <p class="small-font">Price</p>
-            </div>
-            <div class="recommend-product">
-                <img src="images/product-recommendation.jpg" alt="">
-                <p class="small-font">Product Name</p>
-                <p class="small-font">Price</p>
-            </div>
+        <?php $iter--; } ?>
     </div>
-    </center>
+    <br>
     <h2 class="sub-section">Reviews</h2>
     <div class="review-container">
+        <?php 
+
+            $reviewdataquery = "SELECT r.REVIEW_DESC,r.REVIEW_RATING,u.USER_FIRST_NAME,u.USER_LAST_NAME,u.USER_IMAGE 
+                                FROM REVIEW r 
+                                JOIN USERS u ON u.USER_ID = r.USER_ID
+                                WHERE r.PRODUCT_ID = '$product_id'";
+            $reviewdatastmt = oci_parse($conn,$reviewdataquery);
+            oci_execute($reviewdatastmt);
+            while($row = oci_fetch_assoc($reviewdatastmt)){
+
+            
+        ?>
         <div class="reviews">
             <div class="review-profile">
-                <img src="images/profile-review.jpg" alt="profile">
+                <img src="images/<?php echo $row['USER_IMAGE']; ?>" alt="profile">
                 <div class="profile-details">
-                    <p>Profile Name</p>
-                    <span class="small-font">Review Date</p>
-                    <span class="small-font">Star Rating</p>
+                    <p><?php echo($row['USER_FIRST_NAME']." ".$row['USER_LAST_NAME']) ?></p>
+                    <span class="small-font"><?php printStars($row['REVIEW_RATING']) ?></span>
                 </div>
             </div>
             <div class="review-description">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet corrupti nam repudiandae blanditiis a beatae vel nulla amet quisquam animi quod magnam, exercitationem, cupiditate similique dolorum est? Laborum, doloribus minus!. Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iste dolor, ullam voluptatum aperiam officia atque ab magni expedita esse ipsam ut earum praesentium suscipit tempora blanditiis consequatur, nisi totam.</p>
+                <p><?php echo $row['REVIEW_DESC']; ?></p>
             </div>
         </div>
-        <div class="reviews">
-            <div class="review-profile">
-                <img src="images/profile-review.jpg" alt="profile">
-                <div class="profile-details">
-                    <p>Profile Name</p>
-                    <span class="small-font">Review Date</p>
-                    <span class="small-font">Star Rating</p>
-                </div>
-            </div>
-            <div class="review-description">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet corrupti nam repudiandae blanditiis a beatae vel nulla amet quisquam animi quod magnam, exercitationem, cupiditate similique dolorum est? Laborum, doloribus minus!. Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iste dolor, ullam voluptatum aperiam officia atque ab magni expedita esse ipsam ut earum praesentium suscipit tempora blanditiis consequatur, nisi totam.</p>
-            </div>
-        </div>
-        <div class="reviews">
-            <div class="review-profile">
-                <img src="images/profile-review.jpg" alt="profile">
-                <div class="profile-details">
-                    <p>Profile Name</p>
-                    <span class="small-font">Review Date</p>
-                    <span class="small-font">Star Rating</p>
-                </div>
-            </div>
-            <div class="review-description">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet corrupti nam repudiandae blanditiis a beatae vel nulla amet quisquam animi quod magnam, exercitationem, cupiditate similique dolorum est? Laborum, doloribus minus!. Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iste dolor, ullam voluptatum aperiam officia atque ab magni expedita esse ipsam ut earum praesentium suscipit tempora blanditiis consequatur, nisi totam.</p>
-            </div>
-        </div>
+        <?php }?>
     </div>
+        
 
     
 
@@ -178,22 +206,48 @@
             ]
         });
 
+        var productMaxLimit = <?php echo $max_limit; ?>;
+        document.getElementById('add-to-cart-button').addEventListener('click', function(event) {
+        var quantity = document.getElementById('quantity-value').textContent;
+        var addToCartLink = document.getElementById('add-to-cart-link');
+        var url = '<?php if(!isset($_SESSION['id'])) {
+                        echo 'login_register.php';
+                    } else {
+                        echo 'Cart.php?product_id='.$product_id.'&product_quantity=';
+                    } ?>' + quantity;
+        addToCartLink.href = url;
+    });
+        document.getElementById('buy-now-button').addEventListener('click', function(event) {
+        var quantity = document.getElementById('quantity-value').textContent;
+        var addToCartLink = document.getElementById('buy-now-link');
+        var url = '<?php if(!isset($_SESSION['id'])) {
+                        echo 'login_register.php';
+                    } else {
+                        echo 'Cart.php?product_id='.$product_id.'&buynow=1'.'&product_quantity=';
+                    } ?>' + quantity;
+        addToCartLink.href = url;
+    });
 
-        $(document).ready(function() {
-        $('.quantity-plus').click(function() {
-            var quantity = parseInt($('.quantity-value').text());
-            quantity++;
-            $('.quantity-value').text(quantity);
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.quantity-plus').addEventListener('click', function() {
+            var quantity = parseInt(document.getElementById('quantity-value').textContent);
+            if (quantity < productMaxLimit) {
+                quantity++;
+                document.getElementById('quantity-value').textContent = quantity;
+            } else {
+                alert('You have reached the maximum limit for this product.');
+            }
+            document.getElementById('quantity-value').textContent = quantity;
         });
 
-        $('.quantity-minus').click(function() {
-            var quantity = parseInt($('.quantity-value').text());
+        document.querySelector('.quantity-minus').addEventListener('click', function() {
+            var quantity = parseInt(document.getElementById('quantity-value').textContent);
             if (quantity > 1) {
                 quantity--;
-                $('.quantity-value').text(quantity);
+                document.getElementById('quantity-value').textContent = quantity;
             }
         });
-        });
+    });
     </script>
 </body>
 </html>

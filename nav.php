@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="css/nav.css">
+    
 </head>
 <body>
     <?php
@@ -60,6 +61,12 @@
                     <?php
                         if((isset($_SESSION['role']) && ($_SESSION['role'] == 'customer')) || (!isset($_SESSION['role']))){ 
                     ?>
+                        <div class="wishlist">
+                            <a href="Wishlistview.php" style="text-decoration: none;color: black;font-weight: 600;font-size: 1.6rem">
+                                ❤
+                            </a>
+                            
+                        </div>
                         <div class="cart-container">
                             <img src="images/shopping-cart.png" width="25px" height="25px" alt="Cart">
                             <span><a href="Shopping-cart.php">Cart</a></span>

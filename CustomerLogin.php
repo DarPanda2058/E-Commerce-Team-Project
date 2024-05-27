@@ -5,6 +5,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST['customer_email'];
     $password = $_POST['customer_password'];
+    $password = md5($password);
     $role = 'customer';
 
 
@@ -51,6 +52,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             
             $_SESSION['cartID'] = $cart_id;
             $_SESSION['cartQuantity'] = $cart_quantity;
+
+            //storing wishlist from the wishlist table
+            $wishlist_query = "SELECT WISHLIST_ID FROM USERS WHERE USER_ID = '$userID'";
+            $wishlist_stmt = oci_parse($conn,$wishlist_query);
+            oci_execute($wishlist_stmt);
+            $wishlist_row = oci_fetch_assoc($wishlist_stmt);
+            $wishlist_id = $wishlist_row['WISHLIST_ID'];
+
+            //storing wishlist quantity from cart table.
+            $query_wishlist = "SELECT WISHLIST_QUANTITY FROM WISHLIST WHERE WISHLIST_ID = '$wishlist_id'";
+            $wishlist_stmt = oci_parse($conn,$query_wishlist);
+            oci_execute($wishlist_stmt);
+            $row = oci_fetch_assoc($wishlist_stmt);
+            $wishlist_quantity = $row['WISHLIST_QUANTITY'];
+            
+            $_SESSION['cartID'] = $cart_id;
+            $_SESSION['cartQuantity'] = $cart_quantity;
+
+            $_SESSION['wishlistID'] = $wishlist_id;
+            $_SESSION['wishlistQuantity'] = $wishlist_quantity;
 
             
             echo '<script>alert("Logged in Successfully!")</script>';

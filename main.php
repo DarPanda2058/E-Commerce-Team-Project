@@ -24,8 +24,8 @@
     </header>
 
     <center>
-        <h1 class="title" style="font-size: 4rem;font-weight: 600;">Headline</h1>
-        <h1>Sub-headline</h1>
+        <h1 class="title" style="font-size: 4rem;font-weight: 600;">Welcome to The Huddle Hub</h1>
+        <h1 style="font-size: 20px;" >Your one-stop shop for all your grocery needs.</h1>
         <hr width="5%">
     </center>
     <div class="headline">
@@ -143,8 +143,7 @@
             </div>
             <div class="about-text">
                 <h2>About Us</h2>
-                <p></p>
-                <p></p>
+                <p>Welcome to The Huddle Hub! Our passionate team—Darpan Pandey, Shreyash Parajuli, Dajeel Dulal, Atit Dahal, Suchita Acharya, and Anisha Giri—works tirelessly to bring you the freshest groceries and exceptional service. We're dedicated to making your shopping experience seamless and enjoyable. Thank you for choosing The Huddle Hub!</p>
             </div>
         </div>
     </section>
@@ -152,26 +151,6 @@
 
 
     <?php include('footer.html'); ?>
-    <script>
-        $(document).ready(function(){
-            $('#itemslider').carousel({ interval: 3000 });
 
-            $('.carousel-showmanymoveone .item').each(function(){
-                var itemToClone = $(this);
-
-                for (var i=1; i<6; i++) {
-                    itemToClone = itemToClone.next();
-
-                    if (!itemToClone.length) {
-                        itemToClone = $(this).siblings(':first');
-                    }
-
-                    itemToClone.children(':first-child').clone()
-                        .addClass("cloneditem-" + (i))
-                        .appendTo($(this));
-                }
-            });
-        });
-    </script>
 </body>
 </html>

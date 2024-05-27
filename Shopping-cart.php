@@ -55,7 +55,7 @@
         <form action=""></form>
         <?php foreach ($cart_items as $item): ?>
         <tr class="repeating-row" data-product-id="<?php echo $item['PRODUCT_ID']; ?>" data-max-limit="<?php echo $item['PRODUCT_MAX_LIMIT']; ?>">
-            <td class="product-image-cart"><img src="<?php echo $item['PRODUCT_IMAGE']; ?>" alt="Image"></td>
+            <td class="product-image-cart"><img src="<?php echo "images/".$item['PRODUCT_IMAGE']; ?>" alt="Image"></td>
             <td>
                 <div class="product-desc-cart">
                     <p><?php echo htmlspecialchars($item['PRODUCT_NAME']); ?></p>    
@@ -92,53 +92,61 @@
         <button><a href="main.php">Cancel</a></button>
     </div>
     <script>
-        document.querySelectorAll('.quantity-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const action = this.getAttribute('data-action');
-                const row = this.closest('.repeating-row');
-                const maxLimit = parseInt(row.getAttribute('data-max-limit'));
-                const productId = row.getAttribute('data-product-id');
-                const quantityElement = row.querySelector('.quantity');
-                let quantity = parseInt(quantityElement.textContent.trim());
-                const priceElement = row.querySelector('.cart-price');
-                const totalElement = row.querySelector('.cart-total-price');
-                const productPrice = parseFloat(priceElement.textContent.replace('£', '').trim());
-                let subtotalElement = document.getElementById('subtotal');
-                let totalElementOverall = document.getElementById('total');
-                let subtotal = parseFloat(subtotalElement.textContent);
-                
-                if (action === 'increase' && quantity < maxLimit) {
-                    quantity++;
-                } else if (action === 'decrease' && quantity > 1) {
-                    quantity--;
+    document.querySelectorAll('.quantity-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const action = this.getAttribute('data-action');
+            const row = this.closest('.repeating-row');
+            const maxLimit = parseInt(row.getAttribute('data-max-limit'));
+            const productId = row.getAttribute('data-product-id');
+            const quantityElement = row.querySelector('.quantity');
+            let quantity = parseInt(quantityElement.textContent.trim());
+            const priceElement = row.querySelector('.cart-price');
+            const totalElement = row.querySelector('.cart-total-price');
+            const productPrice = parseFloat(priceElement.textContent.replace('£', '').trim());
+            let subtotalElement = document.getElementById('subtotal');
+            let totalElementOverall = document.getElementById('total');
+            let subtotal = parseFloat(subtotalElement.textContent);
+            
+            if (action === 'increase' && quantity < maxLimit) {
+                quantity++;
+            } else if (action === 'decrease' && quantity > 1) {
+                quantity--;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "updateCartQuantity.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText); // Output response for debugging
                 }
+            };
+            xhr.send(`product_id=${productId}&quantity=${quantity}`);
 
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "updateCartQuantity.php", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        console.log(xhr.responseText); // Output response for debugging
-                    }
-                };
-                xhr.send(`product_id=${productId}&quantity=${quantity}`);
+            quantityElement.textContent = ` ${quantity} `;
+            const newTotal = productPrice * quantity;
+            totalElement.textContent = `£ ${newTotal.toFixed(2)}`;
+            
+            // Update subtotal and total
+            subtotal = Array.from(document.querySelectorAll('.cart-total-price'))
+            .map(elem => parseFloat(elem.textContent.replace('£', '').trim()))
+            .reduce((acc, curr) => acc + curr, 0);
+            
+            subtotalElement.textContent = subtotal.toFixed(2);
+            totalElementOverall.textContent = subtotal.toFixed(2);
 
-
-                quantityElement.textContent = ` ${quantity} `;
-                const newTotal = productPrice * quantity;
-                totalElement.textContent = `£ ${newTotal.toFixed(2)}`;
-                
-                // Update subtotal and total
-                subtotal = Array.from(document.querySelectorAll('.cart-total-price'))
-                .map(elem => parseFloat(elem.textContent.replace('£', '').trim()))
-                .reduce((acc, curr) => acc + curr, 0);
-                
-                subtotalElement.textContent = subtotal.toFixed(2);
-                totalElementOverall.textContent = subtotal.toFixed(2);
-                
-
-            });
+            // Update total price in session via AJAX
+            const updateTotalXhr = new XMLHttpRequest();
+            updateTotalXhr.open("POST", "updateTotalPrice.php", true);
+            updateTotalXhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            updateTotalXhr.onreadystatechange = function () {
+                if (updateTotalXhr.readyState === 4 && updateTotalXhr.status === 200) {
+                    console.log(updateTotalXhr.responseText); // Output response for debugging
+                }
+            };
+            updateTotalXhr.send(`total_price=${subtotal.toFixed(2)}`);
         });
-    </script>
+    });
+</script>
 </body>
 </html>

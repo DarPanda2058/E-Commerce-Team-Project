@@ -70,6 +70,9 @@ include('nav.php');
     <h1 class="title"><?php echo $shop_name; ?></h1>
     <?php } ?>
     <h1>Products</h1>
+    <?php if($category){
+        echo '<p style="font-size=1.4rem;">Search for :'.$category.'</p>';
+    } ?>
     <hr width="5%">
 </center>
 <?php
@@ -102,8 +105,12 @@ include('nav.php');
                 <p class="price">&pound;<?php echo $row['PRODUCT_PRICE'] ?></p>
                 <p class="descr"><?php echo $row['PRODUCT_DETAILS'] ?></p>
                 <div class="product-buttons">
-                    <a href="#" class="btn buy">Buy</a>
-                    <a href="#" class="btn add-to-cart">Add to Cart</a>
+                    <a href="ProductPage.php?id=<?php echo $row['PRODUCT_ID'] ;?>" class="btn buy">Buy</a>
+                    <a href="<?php if(isset($_SESSION['role']) && ($_SESSION['role'] == 'customer')){
+                               echo 'Cart.php?product_id='.$row['PRODUCT_ID'].'';
+                            }else{
+                                echo 'login_register.php';
+                            } ?>" class="btn add-to-cart">Add to Cart</a>
                 </div>
             </div>
         </div>

@@ -74,9 +74,9 @@
             <!-- Specify URLs -->
             <input type='hidden' name='cancel_return' value='http://localhost/E-commerce-team-project/PaymentOption.php?error=1'>
             <input type='hidden' name='return' value='http://localhost/E-commerce-team-project/AddtoOrder.php'>
-            <button type="submit" name="submit">Continue</button>
+            <button type="submit" name="submit" style="padding-inline: 60px; padding-block: 12px;" >Continue</button>
             </form>
             <button><a href="main.php">Cancel</a></button>
         </div>
-</body>
+</body> 
 </html>

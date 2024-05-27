@@ -21,6 +21,10 @@
                 <h2>Product Description</h2>
                 <textarea name="pdesc" class="description-field-big" placeholder="Enter description..."></textarea>
             </div>
+            <div class="section">
+                <h2>Allergy Information</h2>
+                <textarea name="pallergy" class="description-field-big" placeholder="Enter description..."></textarea>
+            </div>
             <div class="row">
                 <div class="input-group">
                     <label for="available-stock">
